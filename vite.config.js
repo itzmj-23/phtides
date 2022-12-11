@@ -2,7 +2,8 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fs from 'fs';
 
-const host = 'markjumeras.com';
+// const host = 'markjumeras.com';
+
 
 export default defineConfig({
     plugins: [
@@ -12,17 +13,16 @@ export default defineConfig({
         }),
     ],
     server: {
-        // host: '0.0.0.0',
-        host,
-        // host: '188.166.230.123',
+        host: '0.0.0.0',
+        // host,
         hmr: {
-            // host: 'localhost',
-            host,
+            host: 'localhost',
+            // host,
         },
-        https: {
-            key: fs.readFileSync('/etc/nginx/ssl/jumeras.com/1461323/server.crt'),
-            cert: fs.readFileSync('/etc/nginx/ssl/jumeras.com/1461323/server.crt'),
-        }
+        // https: {
+        //     key: fs.readFileSync('/etc/nginx/ssl/jumeras.com/1461323/server.crt'),
+        //     cert: fs.readFileSync('/etc/nginx/ssl/jumeras.com/1461323/server.crt'),
+        // }
 
     }
 });

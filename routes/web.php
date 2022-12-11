@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TidePredictionController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,6 @@ Route::get('location/create', [LocationController::class, 'create'])->name('loca
 Route::post('location', [LocationController::class, 'store'])->name('location.store');
 Route::get('location/{id}', [LocationController::class, 'show'])->name('location.show');
 Route::put('location/{id}', [LocationController::class, 'update'])->name('location.update');
+
+// API DOC ROUTE
+Route::get('api-doc-v1/', [APIController::class, 'index'])->name('api_doc.index');

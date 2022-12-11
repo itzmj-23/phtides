@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // ------------- TIDE PREDICTION ---------------
-Route::get('/tide_prediction', [TidePredictionController::class, 'apiTidePrediction']);
-Route::get('/tide_prediction/{id}', [TidePredictionController::class, 'apiTidePredictionByLocation']);
+Route::get('/tide_predictions', [TidePredictionController::class, 'apiTidePrediction']);
+Route::get('/tide_predictions/{id}', [TidePredictionController::class, 'apiTidePredictionByLocation']);
 
 // ------------- LOCATION --------------------
-Route::get('/location', [LocationController::class, 'apiLocation']);
+Route::get('/locations', [LocationController::class, 'apiLocation']);
