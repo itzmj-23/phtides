@@ -8,7 +8,7 @@
                 <div class="max-w-xxl">
                     <h1 class="text-5xl font-bold">Welcome to PHTides Web App</h1>
                     <p class="py-6">Is there anything you want to do here?</p>
-                    <div class="grid grid-cols-2 gap-5">
+                    <div class="grid grid-cols-3 gap-5">
                         <div class="card bg-base-100 shadow-xl">
                             <div class="card-body">
                                 <i class="fa-solid fa-water fa-4x"></i>
@@ -24,6 +24,15 @@
                                 <h2 class="card-title mx-auto">Location Data</h2>
                                 <div class="card-actions justify-center mt-5">
                                     <a href="{{ route('location.index') }}" class="btn btn-primary">Go Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="card-body">
+                                <i class="fa-solid fa-file-alt fa-4x"></i>
+                                <h2 class="card-title mx-auto">API Doc</h2>
+                                <div class="card-actions justify-center mt-5">
+                                    <a href="{{ route('api_doc.index') }}" class="btn btn-primary">Go Now</a>
                                 </div>
                             </div>
                         </div>
