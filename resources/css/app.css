@@ -4,3 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.navbar {
+    min-height: 8.5rem;
+}
+

@@ -18,8 +18,10 @@ class TidePredictionController extends Controller
 
     public function index()
     {
-        return view('tide_prediction.index', [
+        $data = TidePrediction::with('location')->get();
 
+        return view('tide_prediction.index', [
+            'data' => $data,
         ]);
     }
 
