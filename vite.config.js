@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import fs from 'fs';
 
-// const host = '188.166.230.123';
-const host = '0.0.0.0';
+const host = 'markjumeras.com';
 
 export default defineConfig({
     plugins: [
@@ -18,6 +18,11 @@ export default defineConfig({
         hmr: {
             // host: 'localhost',
             host,
+        },
+        https: {
+            key: fs.readFileSync('/etc/nginx/ssl/jumeras.com/1461323/server.crt'),
+            cert: fs.readFileSync('/etc/nginx/ssl/jumeras.com/1461323/server.crt'),
         }
+
     }
 });
