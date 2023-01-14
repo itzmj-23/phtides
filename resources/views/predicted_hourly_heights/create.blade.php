@@ -50,7 +50,7 @@
                         </div>
                         <span>Note: Please follow the sample image below for uploading of data file to prevent unseen error.</span>
                         <div class="grid mt-3">
-                            <img src="{{ Vite::asset('resources/images/header_of_predicted_hourly_heights.PNG') }}" alt="" class="w-100">
+                            <img src="{{ Vite::asset('resources/images/header_of_predicted_hourly_heights.png') }}" alt="" class="w-100">
                         </div>
                         <div class="grid grid-cols-4 gap-2">
                             <a href="{{ route('location.create') }}" class="btn bg-error col-start-2 max-w-xs mt-5 text-right" type="button">Clear</a>
