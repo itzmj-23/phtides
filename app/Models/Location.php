@@ -27,4 +27,9 @@ class Location extends Model
     {
         return $this->hasMany(TidePrediction::class);
     }
+
+    public function predicted_hourly_heights()
+    {
+        return $this->hasMany(PredictedHourlyHeights::class);
+    }
 }

@@ -25,9 +25,10 @@
             <div class="flex-none hidden lg:block">
                 <ul class="menu menu-horizontal">
                     <!-- Navbar menu content here -->
-                    <li><a href="{{ route('tide_prediction.index') }}">Tide Prediction Data</a></li>
-                    <li><a href="{{ route('location.index') }}">Location Data</a></li>
-                    <li><a href="{{ route('api_doc.index') }}">API Doc</a></li>
+                    <li><a href="{{ route('predicted_hi_low.index') }}">Predicted Hi & Low Waters</a></li>
+                    <li><a href="{{ route('predicted_hourly_heights.index') }}">Predicted Hourly Heights</a></li>
+                    <li><a href="{{ route('location.index') }}">Locations</a></li>
+                    <li><a href="{{ route('api_doc.index') }}">API Docs</a></li>
                 </ul>
             </div>
         </div>

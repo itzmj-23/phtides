@@ -8,13 +8,22 @@
                 <div class="max-w-xxl">
                     <h1 class="text-5xl font-bold">Welcome to PHTides Web App</h1>
                     <p class="py-6">Is there anything you want to do here?</p>
-                    <div class="grid grid-cols-3 gap-5">
+                    <div class="grid grid-cols-4 gap-5">
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="card-body">
+                                <i class="fa-solid fa-sort fa-4x"></i>
+                                <h2 class="card-title mx-auto">Predicted Hi & Low Waters</h2>
+                                <div class="card-actions justify-center mt-5">
+                                    <a href="{{ route('predicted_hi_low.index') }}" class="btn btn-primary">Go Now</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card bg-base-100 shadow-xl">
                             <div class="card-body">
                                 <i class="fa-solid fa-water fa-4x"></i>
-                                <h2 class="card-title mx-auto">Tide Prediction Data</h2>
+                                <h2 class="card-title mx-auto">Predicted Hourly Heights</h2>
                                 <div class="card-actions justify-center mt-5">
-                                    <a href="{{ route('tide_prediction.index') }}" class="btn btn-primary">Go Now</a>
+                                    <a href="{{ route('predicted_hourly_heights.index') }}" class="btn btn-primary">Go Now</a>
                                 </div>
                             </div>
                         </div>

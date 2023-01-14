@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PredictedHiLowController;
+use App\Http\Controllers\PredictedHourlyHeightsController;
 use App\Http\Controllers\TidePredictionController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +23,18 @@ Route::get('/', function () {
 });
 
 // TIDE PREDICTION ROUTE
-Route::get('tide-prediction', [TidePredictionController::class, 'index'])->name('tide_prediction.index');
-Route::get('tide-prediction/create', [TidePredictionController::class, 'create'])->name('tide_prediction.create');
-Route::post('tide-prediction', [TidePredictionController::class, 'store'])->name('tide_prediction.store');
+//Route::get('tide-prediction', [TidePredictionController::class, 'index'])->name('tide_prediction.index');
+//Route::get('tide-prediction/create', [TidePredictionController::class, 'create'])->name('tide_prediction.create');
+//Route::post('tide-prediction', [TidePredictionController::class, 'store'])->name('tide_prediction.store');
+
+// PREDICTED HOURLY HEIGHTS
+Route::get('predicted-hourly-heights', [PredictedHourlyHeightsController::class, 'index'])->name('predicted_hourly_heights.index');
+Route::get('predicted-hourly-heights/create', [PredictedHourlyHeightsController::class, 'create'])->name('predicted_hourly_heights.create');
+Route::post('predicted-hourly-heights', [PredictedHourlyHeightsController::class, 'store'])->name('predicted_hourly_heights.store');
+
+// PREDICTED HI & LOW WATERS
+Route::get('predicted-hi-low', [PredictedHiLowController::class, 'index'])->name('predicted_hi_low.index');
+Route::get('predicted-hi-low/create', [PredictedHiLowController::class, 'create'])->name('predicted_hi_low.create');
 
 // LOCATION ROUTE
 Route::get('location', [LocationController::class, 'index'])->name('location.index');
