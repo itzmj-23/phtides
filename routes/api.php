@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // ------------- TIDE PREDICTION ---------------
 Route::get('/predicted_hourly_heights/{id}', [PredictedHourlyHeightsController::class, 'apiPredictedHourlyHeightsByLocation']);
+Route::get('/predicted_hourly_heights/export/{id}', [PredictedHourlyHeightsController::class, 'apiTestExport']);
 
 // ------------- LOCATION --------------------
 Route::get('/locations', [LocationController::class, 'apiLocation']);

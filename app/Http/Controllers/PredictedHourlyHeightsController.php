@@ -89,7 +89,9 @@ class PredictedHourlyHeightsController extends Controller
     public function apiPredictedHourlyHeightsByLocation($id)
     {
         try {
-            $data = PredictedHourlyHeights::with('location')->where('location_id', $id)->get();
+            $data = PredictedHourlyHeights::where('location_id', $id)->get(['date', 'hour', 'tide']);
+
+//            dd($data);
 
             if(count($data) <= 0) {
                 return response([
@@ -98,15 +100,22 @@ class PredictedHourlyHeightsController extends Controller
                 ], 200);
             }
 
-            return response([
-                'data' => $data,
-                'message' => 'success',
-            ], 200);
+            return response($data);
+
+//            return response([
+//                'data' => $data,
+//                'message' => 'success',
+//            ], 200);
         } catch (\Exception $e) {
             return response([
                 'result' => $e->getMessage(),
                 'message' => 'error',
             ], 500);
         }
+    }
+
+    public function apiTestExport()
+    {
+        return Excel::download(new PredictedHourlyHeights, 'test.csv');
     }
 }
