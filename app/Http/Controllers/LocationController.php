@@ -102,10 +102,12 @@ class LocationController extends Controller
         try {
             $data = Location::all();
 
-            return response([
-                'result' => $data,
-                'message' => 'success'
-            ], 200);
+            return response($data);
+
+//            return response([
+//                'result' => $data,
+//                'message' => 'success'
+//            ], 200);
         } catch (\Exception $e) {
             return response([
                 'result' => $e->getMessage(),
