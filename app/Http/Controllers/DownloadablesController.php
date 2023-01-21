@@ -8,6 +8,7 @@ use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Spatie\MediaLibrary\Support\MediaStream;
 
 class DownloadablesController extends Controller
 {
@@ -32,10 +33,10 @@ class DownloadablesController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
+
         $request->validate([
-            'name' => ['required', 'max:200', 'unique:reports'],
-            'description' => ['required', 'max:250'],
+            'name' => ['required', 'max:200', 'unique:downloadables'],
+            'description' => 'max:250',
             'file.*' => [
                 'required',
                 'mimes:ppt,pptx,doc,docx,xls,xlsx,csv,txt,xlx,pdf,png,jpeg,jpg,pdf',
@@ -52,16 +53,18 @@ class DownloadablesController extends Controller
             $downloadable = Downloadables::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                // 'original_filename' => $original_filename,
+                 'filepath' => '/storage/' . $request->name,
                 // 'filename' => $filename,
+                'location_id' => $request->location_id,
             ]);
 
             if ($downloadable) {
-                foreach($request->attachments as $attachment) {
-                    $report->addMedia($attachment)
+                foreach($request->file as $attachment) {
+
+                    $downloadable->addMedia($attachment)
                         ->usingName($attachment->getClientOriginalName())
                         ->usingFileName($attachment->hashName())
-                        ->toMediaCollection('reports', 'local_media');
+                        ->toMediaCollection('downloads', 'local_media');
                 }
 
                 // Storage::disk('digitalocean')->putFileAs('reports', $request->file, $filename);
@@ -69,7 +72,7 @@ class DownloadablesController extends Controller
                 DB::commit();
 
                 toastr()->success('File successfully uploaded!', 'Upload');
-                return redirect()->route('admin.report.index');
+                return redirect()->route('downloads.index');
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -79,48 +82,40 @@ class DownloadablesController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Downloadables  $downloadables
-     * @return \Illuminate\Http\Response
-     */
     public function show(Downloadables $downloadables)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Downloadables  $downloadables
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Downloadables $downloadables)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Downloadables  $downloadables
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Downloadables $downloadables)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Downloadables  $downloadables
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Downloadables $downloadables)
     {
         //
+    }
+
+    public function download($id)
+    {
+        $downloads = Downloadables::find($id);
+        $mediaItems = $downloads->getMedia('downloads');
+
+        foreach($mediaItems as $media) {
+            $media->file_name = $media->name;
+            $media->save();
+
+            if (count($mediaItems) > 1) {
+                return MediaStream::create($media['name'] .'.zip')->addMedia($mediaItems);
+            } else {
+                return $media;
+            }
+        }
     }
 }

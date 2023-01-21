@@ -30,7 +30,7 @@
                                     <option disabled selected>Pick one</option>
                                     @foreach($locations as $location)
                                         <option
-                                            value="{{ $location['id'] }}">{{ $location['name'] . ' - Code: '. $location['code'] }}</option>
+                                            value="{{ $location['id'] }}" {{ old('location_id') == $location['id'] ? 'selected' : '' }}>{{ $location['name'] . ' - Code: '. $location['code'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,7 +43,12 @@
                                 </label>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" name="name">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -55,7 +60,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                                    <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    <input type="file" name="file[]" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
                                 </div>
                             </div>
                         </div>
@@ -66,8 +71,13 @@
                                     <span class="label-text-alt">(optional)</span>
                                 </label>
                             </div>
-                            <div class="col">
-                                <textarea class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+                            <div class="col text-left">
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" cols="30" rows="5">{{ old('description') }}</textarea>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -77,13 +87,13 @@
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
 
-                        <div class="row mt-3 text-center">
-                            <span>Note: Please follow the sample image below for uploading of data file to prevent unseen error.</span>
-                            <div class="col mt-3">
-                                <img src="{{ Vite::asset('resources/images/predicted_hi_lows_sample.PNG') }}"
-                                     alt="" width="50%">
-                            </div>
-                        </div>
+{{--                        <div class="row mt-3 text-center">--}}
+{{--                            <span>Note: Please follow the sample image below for uploading of data file to prevent unseen error.</span>--}}
+{{--                            <div class="col mt-3">--}}
+{{--                                <img src="{{ Vite::asset('resources/images/predicted_hi_lows_sample.PNG') }}"--}}
+{{--                                     alt="" width="50%">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                     </form>
                 </div>

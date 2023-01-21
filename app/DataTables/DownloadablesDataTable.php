@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Downloadables;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -14,35 +15,30 @@ use Yajra\DataTables\Services\DataTable;
 
 class DownloadablesDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
-     */
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'downloadables.action')
+            ->addColumn('action', function ($query) {
+                $mediaItems = $query->getMedia('downloads');
+
+                return $this->getActionColumns($query['id'], $mediaItems->count());
+
+            })
+            ->editColumn('location', function ($query) {
+                return $query['location']['name'];
+            })
+            ->editColumn('uploaded_at', function ($query) {
+                return Carbon::parse($query['created_at'])->format('m/d/Y');
+            })
             ->setRowId('id');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Downloadable $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(Downloadables $model): QueryBuilder
     {
         return $model->newQuery();
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -62,11 +58,6 @@ class DownloadablesDataTable extends DataTable
                     ]);
     }
 
-    /**
-     * Get the dataTable columns definition.
-     *
-     * @return array
-     */
     public function getColumns(): array
     {
         return [
@@ -76,17 +67,28 @@ class DownloadablesDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('location'),
+            Column::make('name'),
+            Column::make('description'),
+            Column::make('uploaded_at'),
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
+    protected function getActionColumns($id, $mediaCount)
+    {
+        if ($mediaCount > 0) {
+            $downloadAttachmentsURL = route('downloads.resources', $id);
+
+            return '<form method="POST" action="' . $downloadAttachmentsURL . '">
+                <input type="hidden" name="_token" value="' . @csrf_token() . '" />
+                <button type="submit" class="btn btn-success btn-sm">
+                <i class="fas fa-download"></i> Download</button>
+                </form>
+                ';
+        }
+
+    }
+
     protected function filename(): string
     {
         return 'Downloadables_' . date('YmdHis');
