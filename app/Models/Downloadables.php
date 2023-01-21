@@ -4,16 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class PredictedHiLow extends Model
+class Downloadables extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'date',
-        'hour',
-        'tide',
-        'location_id',
+        'name',
+        'filepath',
+        'description',
+        'location_id'
     ];
 
     public function location()

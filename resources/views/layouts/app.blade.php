@@ -6,47 +6,41 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PHTides Web App</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-<div class="drawer">
-    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col">
-        <!-- Navbar -->
-        <div class="w-full navbar bg-base-30">
-            <div class="flex-none lg:hidden">
-                <label for="my-drawer-3" class="btn btn-square btn-ghost">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </label>
-            </div>
-            <div class="flex-1 px-2 mx-2"><a href="/">
-                    <img src="{{ Vite::asset('resources/images/ph_tides_logo.png') }}" alt="" class="w-32">
-                </a></div>
-            <div class="flex-none hidden lg:block">
-                <ul class="menu menu-horizontal">
-                    <!-- Navbar menu content here -->
-                    <li><a href="{{ route('predicted_hi_low.index') }}">Predicted Hi & Low Waters</a></li>
-                    <li><a href="{{ route('predicted_hourly_heights.index') }}">Predicted Hourly Heights</a></li>
-                    <li><a href="{{ route('location.index') }}">Locations</a></li>
-                    <li><a href="{{ route('api_doc.index') }}">API Docs</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- Page content here -->
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="{{ Vite::asset('resources/images/ph_tides_logo.png') }}" width="120"
+                 class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="{{ route('predicted_hi_lows.index') }}">Predicted Hi & Low Waters</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('predicted_hourly_heights.index') }}">Predicted Hourly Heights</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('location.index') }}">Locations</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('downloads.index') }}">Downloadable Resources</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('api_doc.index') }}">API Docs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <section class="">
+
+        <!-- Page content here -->
         @yield('content')
 
-    </div>
-    <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label>
-        <ul class="menu p-4 w-80 bg-base-100">
-            <!-- Sidebar content here -->
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-
-        </ul>
-
-    </div>
+    </section>
 </div>
+
+@stack('scripts')
 </body>
 </html>

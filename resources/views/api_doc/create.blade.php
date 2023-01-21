@@ -17,12 +17,12 @@
                 <div class="grid grid-cols-2">
                     <h2 class="card-title">Add New Data</h2>
                     <div class="card-actions justify-end">
-                        <a href="{{ route('tide_prediction.create') }}" class="btn btn-primary">Submit</a>
+                        <a href="{{ route('predicted_hi_lows.create') }}" class="btn btn-primary">Submit</a>
                     </div>
                 </div>
 
                 <div class="grid mt-5">
-                    <form id="location_form" action="{{ route('tide_prediction.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="location_form" action="{{ route('predicted_hi_lows.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="grid">
                             <div class="form-control w-full">

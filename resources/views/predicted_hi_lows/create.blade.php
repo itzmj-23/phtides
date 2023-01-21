@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-3">
         <div class="text-center">
-            <h1 class="">Predicted Hourly Heights</h1>
-            <p class="">Predicted Hourly Heights Management begins here</p>
+            <h1 class="">Predicted High and Low</h1>
+            <p class="">Predicted High and Low Management begins here</p>
         </div>
 
         <div class="card mt-4">
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="mt-5">
-                    <form id="location_form" action="{{ route('predicted_hourly_heights.store') }}" method="POST"
+                    <form id="location_form" action="{{ route('predicted_hi_lows.store') }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-block text-center">
-                            <a href="{{ route('predicted_hourly_heights.index') }}"
+                            <a href="{{ route('predicted_hi_lows.index') }}"
                                class="btn btn-link" type="button">Cancel</a>
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
@@ -58,7 +58,7 @@
                         <div class="row mt-3 text-center">
                             <span>Note: Please follow the sample image below for uploading of data file to prevent unseen error.</span>
                             <div class="col mt-3">
-                                <img src="{{ Vite::asset('resources/images/header_of_predicted_hourly_heights.png') }}"
+                                <img src="{{ Vite::asset('resources/images/predicted_hi_lows_sample.PNG') }}"
                                      alt="" width="50%">
                             </div>
                         </div>

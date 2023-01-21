@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PredictedHourlyHeightsDataTable;
 use App\Imports\PredictedHourlyHeightsImport;
 use App\Models\Location;
 use App\Models\PredictedHourlyHeights;
@@ -17,13 +18,11 @@ class PredictedHourlyHeightsController extends Controller
     }
 
 
-    public function index()
+    public function index(PredictedHourlyHeightsDataTable $dataTable)
     {
         $data = PredictedHourlyHeights::with('location')->get();
 
-        return view('predicted_hourly_heights.index', [
-            'data' => $data,
-        ]);
+        return $dataTable->render('predicted_hourly_heights.index');
     }
 
 
@@ -46,6 +45,7 @@ class PredictedHourlyHeightsController extends Controller
         ]);
 
         try {
+            toastr()->info('Importing Data. Please wait.', 'Info', '');
             DB::beginTransaction();
 
             // Import CSV to DB

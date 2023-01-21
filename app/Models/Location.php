@@ -23,13 +23,18 @@ class Location extends Model
         );
     }
 
-    public function tide_predictions()
-    {
-        return $this->hasMany(TidePrediction::class);
-    }
-
     public function predicted_hourly_heights()
     {
         return $this->hasMany(PredictedHourlyHeights::class);
+    }
+
+    public function predicted_hi_lows()
+    {
+        return $this->hasMany(PredictedHiLow::class);
+    }
+
+    public function downloadables()
+    {
+        return $this->hasMany(Downloadables::class);
     }
 }

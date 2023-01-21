@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\PredictedHiLow;
 use App\Models\PredictedHourlyHeights;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
@@ -10,12 +11,9 @@ use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithStartRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
 
-class PredictedHourlyHeightsImport implements ToCollection, WithStartRow, SkipsOnError
+class PredictedHiLowsImport implements ToCollection, WithStartRow, SkipsOnError
 {
     use Importable, SkipsErrors;
 
@@ -34,8 +32,7 @@ class PredictedHourlyHeightsImport implements ToCollection, WithStartRow, SkipsO
     public function collection(Collection $rows)
     {
         Validator::make($rows->toArray(), [
-//            '*.1' => 'unique:predicted_hourly_heights,hour',
-            '*.1' => Rule::unique('predicted_hourly_heights', 'hour')->where(function ($query) use ($rows) {
+            '*.1' => Rule::unique('predicted_hi_lows', 'hour')->where(function ($query) use ($rows) {
                 return $query
                     ->where('date', $rows[0][0])
                     ->where('hour', $rows[0][1]);
@@ -45,7 +42,7 @@ class PredictedHourlyHeightsImport implements ToCollection, WithStartRow, SkipsO
         ])->validate();
 
         foreach ($rows as $row) {
-            PredictedHourlyHeights::create([
+            PredictedHiLow::create([
                 'date' => $row[0],
                 'hour' => $row[1],
                 'tide' => $row[2],
@@ -53,5 +50,4 @@ class PredictedHourlyHeightsImport implements ToCollection, WithStartRow, SkipsO
             ]);
         }
     }
-
 }

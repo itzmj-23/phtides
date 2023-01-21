@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('predicted_hi_lows', function (Blueprint $table) {
+        Schema::create('downloadables', function (Blueprint $table) {
             $table->id();
-            $table->string('date');
-            $table->string('hour');
-            $table->string('tide');
+            $table->string('name');
+            $table->string('filepath');
+            $table->string('description')->nullable();
             $table->string('location_id');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('predicted_hi_lows');
+        Schema::dropIfExists('downloadables');
     }
 };
