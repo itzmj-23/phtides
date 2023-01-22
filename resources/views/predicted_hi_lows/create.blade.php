@@ -58,7 +58,7 @@
                         <div class="row mt-3 text-center">
                             <span>Note: Please follow the sample image below for uploading of data file to prevent unseen error.</span>
                             <div class="col mt-3">
-                                <img src="{{ Vite::asset('resources/images/predicted_hi_lows_sample.PNG') }}"
+                                <img src="{{ Vite::asset('resources/images/predicted_hi_lows_sample.png') }}"
                                      alt="" width="50%">
                             </div>
                         </div>
