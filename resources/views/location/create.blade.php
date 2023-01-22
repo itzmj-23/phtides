@@ -141,18 +141,6 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <label class="label">
-                                    <span class="label-text">Coordinate Long <span class="small">(optional)</span></span>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <input type="text" name="coordinates_long" value="{{ old('coordinates_long') }}" placeholder="Type here"
-                                       class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label class="label">
                                     <span class="label-text">TGBMs <span class="small">(optional)</span></span>
                                 </label>
                             </div>
