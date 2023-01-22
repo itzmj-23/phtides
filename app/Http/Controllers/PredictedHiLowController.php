@@ -65,7 +65,7 @@ class PredictedHiLowController extends Controller
         try {
             $data = PredictedHiLow::where('location_id', $id)->get(['date', 'hour', 'tide']);
 
-            dd($data);
+//            dd($data);
 
             if(count($data) <= 0) {
                 return response([
