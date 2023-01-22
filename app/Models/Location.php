@@ -14,6 +14,22 @@ class Location extends Model
         'code',
         'name',
         'description',
+        'location',
+        'coordinates_lat',
+        'coordinates_long',
+        'tide_house',
+        'instruments',
+        'enclosure',
+        'controller',
+        'tgbm',
+        'tide_staff',
+        'description',
+    ];
+
+    protected $casts = [
+        'instruments' => 'array',
+        'enclosure' => 'array',
+        'controller' => 'array',
     ];
 
     protected function name(): Attribute

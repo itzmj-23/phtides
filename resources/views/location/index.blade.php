@@ -3,19 +3,14 @@
 @section('content')
 
     <div class="container mx-auto">
-        <div class="hero bg-base-200 mt-5">
-            <div class="hero-content text-center">
-                <div class="max-w-xxl">
-                    <h1 class="text-5xl font-bold">Location Data</h1>
-                    <p class="py-6">Location Data management begins here</p>
-                </div>
-            </div>
+        <div class="hero mt-5">
+            <h1 class="text-5xl font-bold">Location Data</h1>
+            <p class="py-6">Location Data management begins here</p>
         </div>
 
         <div class="card bg-base-100 shadow-xl mt-5">
             <div class="card-body">
                 <div class="grid grid-cols-2">
-                    <h2 class="card-title">Lists of Data</h2>
                     <div class="card-actions justify-end">
                         <a href="{{ route('location.create') }}" class="btn btn-primary">Add Data</a>
                     </div>
@@ -41,7 +36,8 @@
                                     <td>{{ $data['name'] }}</td>
                                     <td>{{ $data['description'] }}</td>
                                     <td>
-                                        <a href="{{ route('location.show', $data['id']) }}" class="btn btn-primary btn-sm">Manage</a>
+                                        <a href="{{ route('location.show', $data['id']) }}"
+                                           class="btn btn-primary btn-sm">Manage</a>
                                     </td>
                                 </tr>
                             @endforeach

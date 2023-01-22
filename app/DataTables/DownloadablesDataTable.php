@@ -79,7 +79,7 @@ class DownloadablesDataTable extends DataTable
         if ($mediaCount > 0) {
             $downloadAttachmentsURL = route('downloads.resources', $id);
 
-            return '<form method="POST" action="' . $downloadAttachmentsURL . '">
+            return '<form method="GET" action="' . $downloadAttachmentsURL . '">
                 <input type="hidden" name="_token" value="' . @csrf_token() . '" />
                 <button type="submit" class="btn btn-success btn-sm">
                 <i class="fas fa-download"></i> Download</button>

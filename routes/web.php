@@ -44,7 +44,7 @@ Route::get('downloads', [DownloadablesController::class, 'index'])->name('downlo
 Route::get('downloads/create', [DownloadablesController::class, 'create'])->name('downloads.create');
 Route::post('downloads', [DownloadablesController::class, 'store'])->name('downloads.store');
 Route::get('downloads/{id}/show', [DownloadablesController::class, 'show'])->name('downloads.show');
-Route::post('downloads/{id}', [DownloadablesController::class, 'download'])->name('downloads.resources');
+Route::get('downloads/{id}', [DownloadablesController::class, 'download'])->name('downloads.resources');
 
 // API DOC ROUTE
 Route::get('api-doc-v1/', [APIController::class, 'index'])->name('api_doc.index');

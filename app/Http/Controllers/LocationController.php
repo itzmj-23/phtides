@@ -29,10 +29,37 @@ class LocationController extends Controller
 
     public function store(Request $request)
     {
+        if ($request['instruments']) {
+            $array = explode(',', $request['instruments']);
+
+            $request->merge(['instruments' => $array]);
+        }
+
+        if ($request['enclosure']) {
+            $array = explode(',', $request['enclosure']);
+
+            $request->merge(['enclosure' => $array]);
+        }
+
+        if ($request['controller']) {
+            $array = explode(',', $request['controller']);
+
+            $request->merge(['controller' => $array]);
+        }
+
         $validated = $request->validate([
             'code' => 'nullable',
             'name' => 'required|unique:locations,name',
             'description' => 'nullable',
+            'location' => 'nullable',
+            'coordinates_lat' => 'nullable',
+            'coordinates_long' => 'nullable',
+            'tide_house' => 'nullable',
+            'instruments' => 'nullable',
+            'enclosure' => 'nullable',
+            'controller' => 'nullable',
+            'tgbm' => 'nullable',
+            'tide_staff' => 'nullable',
         ]);
 
         try {
@@ -69,10 +96,37 @@ class LocationController extends Controller
     {
         $data = Location::find($id);
 
+        if ($request['instruments']) {
+            $array = explode(',', $request['instruments']);
+
+            $request->merge(['instruments' => $array]);
+        }
+
+        if ($request['enclosure']) {
+            $array = explode(',', $request['enclosure']);
+
+            $request->merge(['enclosure' => $array]);
+        }
+
+        if ($request['controller']) {
+            $array = explode(',', $request['controller']);
+
+            $request->merge(['controller' => $array]);
+        }
+
         $validated = $request->validate([
             'code' => 'nullable|sometimes|unique:locations,code,'. $data['id'],
             'name' => 'required|unique:locations,name,'. $data['id'],
             'description' => 'nullable',
+            'location' => 'nullable',
+            'coordinates_lat' => 'nullable',
+            'coordinates_long' => 'nullable',
+            'tide_house' => 'nullable',
+            'instruments' => 'nullable',
+            'enclosure' => 'nullable',
+            'controller' => 'nullable',
+            'tgbm' => 'nullable',
+            'tide_staff' => 'nullable',
         ]);
 
         try {

@@ -3,16 +3,12 @@
 @section('content')
 
     <div class="container mx-auto">
-        <div class="hero bg-base-200 mt-5">
-            <div class="hero-content text-center">
-                <div class="max-w-xxl">
-                    <h1 class="text-5xl font-bold">API Doc</h1>
-                    <p class="py-6">API endpoints are listed here</p>
-                </div>
-            </div>
+        <div class="text-center mt-5">
+            <h1 class="text-5xl font-bold">API Doc</h1>
+            <p class="py-6">API endpoints are listed here</p>
         </div>
 
-        <div class="card bg-base-100 shadow-xl mt-5">
+        <div class="card mt-4">
             <div class="card-body">
                 <div class="grid grid-cols-2">
                     <h2 class="card-title">Lists of API EndPoints</h2>
@@ -25,9 +21,9 @@
 
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>Parameters</th>
-                                </tr>
+                            <tr>
+                                <th>Parameters</th>
+                            </tr>
                             </thead>
                             <tbody>
                             <tr>
@@ -178,7 +174,8 @@
 
                 <div class="grid">
                     <div class="card-body">
-                        <h3 class="card-title">Tide Predictions <span class="badge">/api/tide_predictions/{location_id}</span></h3>
+                        <h3 class="card-title">Tide Predictions <span
+                                class="badge">/api/tide_predictions/{location_id}</span></h3>
                         <p class="label">returns all data of tide predictions of only one location</p>
 
                         <table class="table">
