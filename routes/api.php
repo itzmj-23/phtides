@@ -31,6 +31,7 @@ Route::get('/predicted_hourly_heights/export/{id}', [PredictedHourlyHeightsContr
 Route::get('/predicted_hi_lows/{id}', [PredictedHiLowController::class, 'apiPredictedHiLowsByLocation']);
 
 // ------------- DOWNLOADABLE RESOURCES ----------------
+Route::get('/downloads/resources', [DownloadablesController::class, 'resources']);
 Route::get('/downloads/{id}', [DownloadablesController::class, 'download']);
 
 // ------------- LOCATION --------------------

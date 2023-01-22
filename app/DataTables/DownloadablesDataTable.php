@@ -36,7 +36,7 @@ class DownloadablesDataTable extends DataTable
 
     public function query(Downloadables $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->with('media')->newQuery();
     }
 
     public function html(): HtmlBuilder

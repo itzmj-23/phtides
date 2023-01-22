@@ -63,7 +63,7 @@ class DownloadablesController extends Controller
 
                     $downloadable->addMedia($attachment)
                         ->usingName($attachment->getClientOriginalName())
-                        ->usingFileName($attachment->hashName())
+                        ->usingFileName($attachment->getClientOriginalName())
                         ->toMediaCollection('downloads', 'local_media');
                 }
 
@@ -102,6 +102,15 @@ class DownloadablesController extends Controller
         //
     }
 
+    public function resources()
+    {
+        $data = Downloadables::with('location:id,name', 'media:id,model_id,name,file_name,disk')->get();
+
+//        dd($data);
+
+        return response($data);
+    }
+
     public function download($id)
     {
         $downloads = Downloadables::find($id);
@@ -112,7 +121,7 @@ class DownloadablesController extends Controller
             $media->save();
 
             if (count($mediaItems) > 1) {
-                return MediaStream::create($media['name'] .'.zip')->addMedia($mediaItems);
+                return MediaStream::create($downloads['name'] .'.zip')->addMedia($mediaItems);
             } else {
                 return $media;
             }
