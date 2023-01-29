@@ -36,3 +36,4 @@ Route::get('/downloads/{id}', [DownloadablesController::class, 'download']);
 
 // ------------- LOCATION --------------------
 Route::get('/locations', [LocationController::class, 'apiLocation']);
+Route::get('/locations/{id}', [LocationController::class, 'apiLocationByID']);

@@ -169,4 +169,23 @@ class LocationController extends Controller
             ], 500);
         }
     }
+
+    public function apiLocationByID($id)
+    {
+        try {
+            $data = Location::find($id);
+
+            return response($data);
+
+//            return response([
+//                'result' => $data,
+//                'message' => 'success'
+//            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                'result' => $e->getMessage(),
+                'message' => 'error'
+            ], 500);
+        }
+    }
 }
