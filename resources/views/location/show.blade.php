@@ -107,7 +107,7 @@
                                 </label>
                             </div>
                             <div class="col">
-                                <input type="text" name="instruments" value="{{ old('instruments', implode(',', $data['instruments'])) }}" placeholder="Type here"
+                                <input type="text" name="instruments" value="{{ old('instruments', $data['instruments'] ? implode(',', $data['instruments']) : '') }}" placeholder="Type here"
                                        class="form-control"/>
                                 <span class="">If multiple values, separate with a comma or Enter key.</span>
                             </div>
@@ -120,7 +120,7 @@
                                 </label>
                             </div>
                             <div class="col">
-                                <input type="text" name="enclosure" value="{{ old('enclosure', implode(',', $data['enclosure'])) }}" placeholder="Type here"
+                                <input type="text" name="enclosure" value="{{ old('enclosure', $data['enclosure'] ? implode(',', $data['enclosure']) : '') }}" placeholder="Type here"
                                        class="form-control"/>
                                 <span class="">If multiple values, separate with a comma or Enter key.</span>
                             </div>
@@ -133,7 +133,7 @@
                                 </label>
                             </div>
                             <div class="col">
-                                <input type="text" name="controller" value="{{ old('controller', implode(',', $data['controller'])) }}" placeholder="Type here"
+                                <input type="text" name="controller" value="{{ old('controller', $data['controller'] ? implode(',', $data['controller']) : '') }}" placeholder="Type here"
                                        class="form-control"/>
                                 <span class="">If multiple values, separate with a comma or Enter key.</span>
                             </div>
