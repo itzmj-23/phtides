@@ -37,14 +37,17 @@ class DownloadablesController extends Controller
         $request->validate([
             'name' => ['required', 'max:200', 'unique:downloadables'],
             'description' => 'max:250',
-            'file.*' => [
+            'file' => [
                 'required',
                 'mimes:ppt,pptx,doc,docx,xls,xlsx,csv,txt,xlx,pdf,png,jpeg,jpg,pdf',
                 'max:20480'],
             'location_id' => 'required',
-        ],[
-            'file.*.max' => 'The file must not be greater that 20MB.',
-            'name.unique' => 'The name is not available. Please try another.'
+            'collection_name' => 'required',
+        ], [
+            'file.max' => 'The file must not be greater that 20MB.',
+            'name.unique' => 'The name is not available. Please try another.',
+            'location_id.required' => 'The location field is required.',
+            'collection_name.required' => 'The category field is required.',
         ]);
 
         try {
@@ -53,19 +56,16 @@ class DownloadablesController extends Controller
             $downloadable = Downloadables::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                 'filepath' => '/storage/' . $request->name,
+                'filepath' => '/storage/' . $request->name,
                 // 'filename' => $filename,
                 'location_id' => $request->location_id,
             ]);
 
             if ($downloadable) {
-                foreach($request->file as $attachment) {
-
-                    $downloadable->addMedia($attachment)
-                        ->usingName($attachment->getClientOriginalName())
-                        ->usingFileName($attachment->getClientOriginalName())
-                        ->toMediaCollection('downloads', 'local_media');
-                }
+                $downloadable->addMedia($request['file'])
+                    ->usingName($request['file']->getClientOriginalName())
+                    ->usingFileName($request['file']->getClientOriginalName())
+                    ->toMediaCollection($request['collection_name'], 'local_media');
 
                 // Storage::disk('digitalocean')->putFileAs('reports', $request->file, $filename);
 
@@ -106,6 +106,12 @@ class DownloadablesController extends Controller
     {
         $data = Downloadables::with('location:id,name', 'media:id,model_id,name,file_name,disk')->get();
 
+        $data = Downloadables::with('location', 'media')->get()->groupBy('location.id');
+
+        $locationWithDownloadables = Location::has('downloadables')->get(['id', 'code', 'name', 'location']);
+
+//        $locationWithMedia = Location::with('downloadables', 'media')->get();
+
 //        dd($data);
 
         return response($data);
@@ -116,12 +122,12 @@ class DownloadablesController extends Controller
         $downloads = Downloadables::find($id);
         $mediaItems = $downloads->getMedia('downloads');
 
-        foreach($mediaItems as $media) {
+        foreach ($mediaItems as $media) {
             $media->file_name = $media->name;
             $media->save();
 
             if (count($mediaItems) > 1) {
-                return MediaStream::create($downloads['name'] .'.zip')->addMedia($mediaItems);
+                return MediaStream::create($downloads['name'] . '.zip')->addMedia($mediaItems);
             } else {
                 return $media;
             }

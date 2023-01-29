@@ -26,13 +26,18 @@
                                 </label>
                             </div>
                             <div class="col">
-                                <select class="form-select" name="location_id">
+                                <select class="form-select @error('location_id') is-invalid @enderror" name="location_id">
                                     <option disabled selected>Pick one</option>
                                     @foreach($locations as $location)
                                         <option
                                             value="{{ $location['id'] }}" {{ old('location_id') == $location['id'] ? 'selected' : '' }}>{{ $location['name'] . ' - Code: '. $location['code'] }}</option>
                                     @endforeach
                                 </select>
+                                @error('location_id')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -60,8 +65,36 @@
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                                    <input type="file" name="file[]" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+                                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+                                    @error('file')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label class="label">
+                                    <span class="label-text">Category</span>
+                                    <span class="label-text-alt">*</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <select class="form-select @error('collection_name') is-invalid @enderror" name="collection_name">
+                                    <option disabled selected>Pick one</option>
+                                    <option value="primary-hourly-heights">Primary Tide Stations - Hourly Heights</option>
+                                    <option value="primary-hi-low">Primary Tide Stations - Hi and Low Waters</option>
+                                    <option value="secondary-hourly-heights">Secondary Tide Stations - Hourly Heights</option>
+                                    <option value="secondary-hi-low">Secondary Tide Stations - Hi and Low Waters</option>
+                                </select>
+                                @error('collection_name')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
