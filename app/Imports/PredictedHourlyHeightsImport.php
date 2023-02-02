@@ -33,16 +33,18 @@ class PredictedHourlyHeightsImport implements ToCollection, WithStartRow, SkipsO
 
     public function collection(Collection $rows)
     {
-        Validator::make($rows->toArray(), [
-//            '*.1' => 'unique:predicted_hourly_heights,hour',
-            '*.1' => Rule::unique('predicted_hourly_heights', 'hour')->where(function ($query) use ($rows) {
-                return $query
-                    ->where('date', $rows[0][0])
-                    ->where('hour', $rows[0][1]);
-            }),
-        ],[
-            '*.1.unique' => 'Duplicate row data.',
-        ])->validate();
+
+//        Unique Validation is not working
+//        Validator::make($rows->toArray()[0], [
+////            '*.1' => 'unique:predicted_hourly_heights,hour',
+//            '*.1' => Rule::unique('predicted_hourly_heights')->where(function ($query) use ($rows) {
+//                return $query
+//                    ->where('date', $rows[0])
+//                    ->where('hour', $rows[1]);
+//            }),
+//        ],[
+//            '*.1.unique' => 'Duplicate row data.',
+//        ])->validate();
 
         foreach ($rows as $row) {
             PredictedHourlyHeights::create([

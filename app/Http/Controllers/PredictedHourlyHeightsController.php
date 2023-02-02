@@ -45,7 +45,7 @@ class PredictedHourlyHeightsController extends Controller
         ]);
 
         try {
-            toastr()->info('Importing Data. Please wait.', 'Info');
+//            toastr()->info('Importing Data. Please wait.', 'Info');
             DB::beginTransaction();
 
             // Import CSV to DB
