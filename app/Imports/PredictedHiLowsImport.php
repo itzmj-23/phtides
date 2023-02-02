@@ -31,15 +31,15 @@ class PredictedHiLowsImport implements ToCollection, WithStartRow, SkipsOnError
 
     public function collection(Collection $rows)
     {
-        Validator::make($rows->toArray(), [
-            '*.1' => Rule::unique('predicted_hi_lows', 'hour')->where(function ($query) use ($rows) {
-                return $query
-                    ->where('date', $rows[0][0])
-                    ->where('hour', $rows[0][1]);
-            }),
-        ],[
-            '*.1.unique' => 'Duplicate row data.',
-        ])->validate();
+//        Validator::make($rows->toArray(), [
+//            '*.1' => Rule::unique('predicted_hi_lows', 'hour')->where(function ($query) use ($rows) {
+//                return $query
+//                    ->where('date', $rows[0][0])
+//                    ->where('hour', $rows[0][1]);
+//            }),
+//        ],[
+//            '*.1.unique' => 'Duplicate row data.',
+//        ])->validate();
 
         foreach ($rows as $row) {
             PredictedHiLow::create([
