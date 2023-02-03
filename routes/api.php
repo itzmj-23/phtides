@@ -31,7 +31,11 @@ Route::get('/predicted_hourly_heights/export/{id}', [PredictedHourlyHeightsContr
 Route::get('/predicted_hi_lows/{id}', [PredictedHiLowController::class, 'apiPredictedHiLowsByLocation']);
 
 // ------------- DOWNLOADABLE RESOURCES ----------------
-Route::get('/downloads/locations', [DownloadablesController::class, 'locationsWithDownloadables']);
+Route::get('/downloads/locations/hourly-heights/primary', [DownloadablesController::class, 'primaryHourlyHeightsLoc']);
+Route::get('/downloads/locations/hourly-heights/secondary', [DownloadablesController::class, 'secondaryHourlyHeightsLoc']);
+Route::get('/downloads/locations/hi-low/primary', [DownloadablesController::class, 'primaryHiLowLoc']);
+Route::get('/downloads/locations/hi-low/secondary', [DownloadablesController::class, 'secondaryHiLowLoc']);
+
 Route::get('/downloads/{id}', [DownloadablesController::class, 'download']);
 
 // ------------- LOCATION --------------------

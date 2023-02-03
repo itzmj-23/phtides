@@ -100,11 +100,38 @@ class DownloadablesController extends Controller
         //
     }
 
-    public function locationsWithDownloadables()
+    public function primaryHourlyHeightsLoc()
     {
-        $data = Downloadables::with('location', 'media')->get()->groupBy('location.id');
+        $locationWithDownloadables = Location::whereHas('downloadables')
+            ->whereRelation('downloadables', 'category', 'primary-hourly-heights')
+            ->get(['id', 'code']);
 
-        $locationWithDownloadables = Location::has('downloadables')->get(['id', 'name']);
+        return response($locationWithDownloadables);
+    }
+
+    public function primaryHiLowLoc()
+    {
+        $locationWithDownloadables = Location::whereHas('downloadables')
+            ->whereRelation('downloadables', 'category', 'primary-hi-low')
+            ->get(['id', 'code']);
+
+        return response($locationWithDownloadables);
+    }
+
+    public function secondaryHourlyHeightsLoc()
+    {
+        $locationWithDownloadables = Location::whereHas('downloadables')
+            ->whereRelation('downloadables', 'category', 'secondary-hourly-heights')
+            ->get(['id', 'code']);
+
+        return response($locationWithDownloadables);
+    }
+
+    public function secondaryHiLowLoc()
+    {
+        $locationWithDownloadables = Location::whereHas('downloadables')
+            ->whereRelation('downloadables', 'category', 'secondary-hi-low')
+            ->get(['id', 'code']);
 
         return response($locationWithDownloadables);
     }
