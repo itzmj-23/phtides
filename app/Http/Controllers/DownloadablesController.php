@@ -136,10 +136,11 @@ class DownloadablesController extends Controller
         return response($locationWithDownloadables);
     }
 
-    public function download($id)
+    public function download($id, $collection_name)
     {
         $downloads = Downloadables::find($id);
-        $mediaItems = $downloads->getMedia('downloads');
+
+        $mediaItems = $downloads->getMedia($collection_name);
 
         foreach ($mediaItems as $media) {
             $media->file_name = $media->name;

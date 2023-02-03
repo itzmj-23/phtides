@@ -36,7 +36,7 @@ Route::get('/downloads/locations/hourly-heights/secondary', [DownloadablesContro
 Route::get('/downloads/locations/hi-low/primary', [DownloadablesController::class, 'primaryHiLowLoc']);
 Route::get('/downloads/locations/hi-low/secondary', [DownloadablesController::class, 'secondaryHiLowLoc']);
 
-Route::get('/downloads/{id}', [DownloadablesController::class, 'download']);
+Route::get('/downloads/{id}/{collection_name}', [DownloadablesController::class, 'download']);
 
 // ------------- LOCATION --------------------
 Route::get('/locations', [LocationController::class, 'apiLocation']);
