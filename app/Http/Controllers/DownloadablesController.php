@@ -33,9 +33,8 @@ class DownloadablesController extends Controller
 
     public function store(Request $request)
     {
-
-        $request->validate([
-            'name' => ['required', 'max:200', 'unique:downloadables'],
+        $validated = $request->validate([
+            'timeframe' => 'required',
             'description' => 'max:250',
             'file' => [
                 'required',
@@ -45,19 +44,18 @@ class DownloadablesController extends Controller
             'collection_name' => 'required',
         ], [
             'file.max' => 'The file must not be greater that 20MB.',
-            'name.unique' => 'The name is not available. Please try another.',
             'location_id.required' => 'The location field is required.',
             'collection_name.required' => 'The category field is required.',
+            'timeframe.required' => 'The month year field is required.',
         ]);
 
         try {
             DB::beginTransaction();
 
             $downloadable = Downloadables::create([
-                'name' => $request->name,
+                'category' => $request->collection_name,
+                'timeframe' => $request->timeframe,
                 'description' => $request->description,
-                'filepath' => '/storage/' . $request->name,
-                // 'filename' => $filename,
                 'location_id' => $request->location_id,
             ]);
 
@@ -102,19 +100,13 @@ class DownloadablesController extends Controller
         //
     }
 
-    public function resources()
+    public function locationsWithDownloadables()
     {
-        $data = Downloadables::with('location:id,name', 'media:id,model_id,name,file_name,disk')->get();
-
         $data = Downloadables::with('location', 'media')->get()->groupBy('location.id');
 
-        $locationWithDownloadables = Location::has('downloadables')->get(['id', 'code', 'name', 'location']);
+        $locationWithDownloadables = Location::has('downloadables')->get(['id', 'name']);
 
-//        $locationWithMedia = Location::with('downloadables', 'media')->get();
-
-//        dd($data);
-
-        return response($data);
+        return response($locationWithDownloadables);
     }
 
     public function download($id)

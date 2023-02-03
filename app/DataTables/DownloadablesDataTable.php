@@ -20,7 +20,10 @@ class DownloadablesDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $mediaItems = $query->getMedia('downloads');
+                $mediaItems = $query->getMedia('primary-hourly-heights');
+
+                $mediaItems = $query->getRegisteredMediaCollections();
+//                $mediaItems += $query->getMedia('primary-hi-low');
 
                 return $this->getActionColumns($query['id'], $mediaItems->count());
 
@@ -30,6 +33,9 @@ class DownloadablesDataTable extends DataTable
             })
             ->editColumn('uploaded_at', function ($query) {
                 return Carbon::parse($query['created_at'])->format('m/d/Y');
+            })
+            ->editColumn('monthYear', function ($query) {
+                return $query['timeframe'];
             })
             ->setRowId('id');
     }
@@ -68,7 +74,8 @@ class DownloadablesDataTable extends DataTable
                   ->addClass('text-center'),
             Column::make('id'),
             Column::make('location'),
-            Column::make('name'),
+            Column::make('category'),
+            Column::make('monthYear'),
             Column::make('description'),
             Column::make('uploaded_at'),
         ];

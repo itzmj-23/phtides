@@ -43,29 +43,13 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <label class="label">
-                                    <span class="label-text">Name</span>
-                                    <span class="label-text-alt">*</span>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <input type="text" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" name="name">
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label class="label">
                                     <span class="label-text">Pick a file</span>
                                     <span class="label-text-alt">*</span>
                                 </label>
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+                                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                     @error('file')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -73,6 +57,24 @@
                                     @enderror
                                 </div>
 
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label class="label">
+                                    <span class="label-text">Month Year</span>
+                                    <span class="label-text-alt">*</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <div class="input-group timeframe">
+                                    <input id="timeframe" name="timeframe" type="text" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Choose date and month">
+                                    @error('timeframe')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -134,5 +136,11 @@
             </div>
         </div>
     </div>
+
+{{--    @push('scripts')--}}
+{{--        <script>--}}
+{{--            --}}
+{{--        </script>--}}
+{{--    @endpush()--}}
 
 @endsection

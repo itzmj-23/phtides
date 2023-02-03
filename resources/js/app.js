@@ -5,7 +5,12 @@ import './bootstrap-tagsinput';
 
 import './custom-tagsinput';
 
+import '../js/bootstrap-datepicker.min';
+
 import '../css/bootstrap-tagsinput.css';
+
+import '../css/bootstrap-datepicker.css';
+
 
 import.meta.glob([
     '../images/**',

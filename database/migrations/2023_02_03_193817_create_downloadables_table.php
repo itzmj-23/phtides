@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('downloadables', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('filepath');
+            $table->string('category');
+            $table->string('timeframe')->nullable();
             $table->string('description')->nullable();
             $table->string('location_id');
             $table->timestamps();

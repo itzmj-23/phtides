@@ -12,8 +12,8 @@ class Downloadables extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'name',
-        'filepath',
+        'category',
+        'timeframe',
         'description',
         'location_id'
     ];
@@ -21,5 +21,13 @@ class Downloadables extends Model implements HasMedia
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('primary-hourly-heights');
+        $this->addMediaCollection('primary-hi-low	');
+        $this->addMediaCollection('secondary-hourly-heights');
+        $this->addMediaCollection('secondary-hi-low');
     }
 }
