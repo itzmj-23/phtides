@@ -136,6 +136,16 @@ class DownloadablesController extends Controller
         return response($locationWithDownloadables);
     }
 
+    public function locationDownloadables($id, $category)
+    {
+        $data = Downloadables::whereHas('location')
+            ->whereRelation('location', 'id', $id)
+            ->where('category', $category)
+            ->get();
+
+        return response($data);
+    }
+
     public function download($id, $collection_name)
     {
         $downloads = Downloadables::find($id);
