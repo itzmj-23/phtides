@@ -104,7 +104,7 @@ class DownloadablesController extends Controller
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
             ->whereRelation('downloadables', 'category', 'primary-hourly-heights')
-            ->get(['id', 'code']);
+            ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
@@ -113,7 +113,7 @@ class DownloadablesController extends Controller
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
             ->whereRelation('downloadables', 'category', 'primary-hi-low')
-            ->get(['id', 'code']);
+            ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
@@ -122,7 +122,7 @@ class DownloadablesController extends Controller
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
             ->whereRelation('downloadables', 'category', 'secondary-hourly-heights')
-            ->get(['id', 'code']);
+            ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
@@ -131,7 +131,7 @@ class DownloadablesController extends Controller
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
             ->whereRelation('downloadables', 'category', 'secondary-hi-low')
-            ->get(['id', 'code']);
+            ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
