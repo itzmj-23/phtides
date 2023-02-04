@@ -114,8 +114,10 @@ class DownloadablesController extends Controller
     public function primaryHiLowLoc()
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
-            ->whereRelation('downloadables', 'category', 'primary-hi-low')
-            ->get(['id', 'name']);
+            ->with(['downloadables' => function ($query) {
+                $query->where('category', 'primary-hi-low');
+                $query->select(['id', 'location_id', 'category', 'timeframe']);
+            }])->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
@@ -123,8 +125,10 @@ class DownloadablesController extends Controller
     public function secondaryHourlyHeightsLoc()
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
-            ->whereRelation('downloadables', 'category', 'secondary-hourly-heights')
-            ->get(['id', 'name']);
+            ->with(['downloadables' => function ($query) {
+                $query->where('category', 'secondary-hourly-heights');
+                $query->select(['id', 'location_id', 'category', 'timeframe']);
+            }])->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
@@ -132,8 +136,10 @@ class DownloadablesController extends Controller
     public function secondaryHiLowLoc()
     {
         $locationWithDownloadables = Location::whereHas('downloadables')
-            ->whereRelation('downloadables', 'category', 'secondary-hi-low')
-            ->get(['id', 'name']);
+            ->with(['downloadables' => function ($query) {
+                $query->where('category', 'secondary-hi-low');
+                $query->select(['id', 'location_id', 'category', 'timeframe']);
+            }])->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
