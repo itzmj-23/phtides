@@ -102,9 +102,10 @@ class DownloadablesController extends Controller
 
     public function primaryHourlyHeightsLoc()
     {
-        $locationWithDownloadables = Location::whereHas('downloadables')
-            ->whereRelation('downloadables', 'category', 'primary-hourly-heights')
-            ->get(['id', 'name']);
+        $locationWithDownloadables = Location::with(['downloadables' => function ($query) {
+            $query->where('category', 'primary-hourly-heights');
+            $query->select(['id', 'location_id', 'category', 'timeframe']);
+        }])->get(['id', 'name']);
 
         return response($locationWithDownloadables);
     }
