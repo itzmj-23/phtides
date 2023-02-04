@@ -146,9 +146,11 @@ class DownloadablesController extends Controller
         return response($data);
     }
 
-    public function download($id, $collection_name)
+    public function download($id, $collection_name, $timeframe)
     {
-        $downloads = Downloadables::find($id);
+        $downloads = Downloadables::where('location_id', $id)
+            ->where('timeframe', $timeframe)
+            ->where('category', $collection_name)->first();
 
         $mediaItems = $downloads->getMedia($collection_name);
 
