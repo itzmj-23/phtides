@@ -2,6 +2,9 @@ import _ from 'lodash';
 window._ = _;
 
 import 'bootstrap';
+import flatpickr from "flatpickr";
+
+window.flatpickr = flatpickr;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

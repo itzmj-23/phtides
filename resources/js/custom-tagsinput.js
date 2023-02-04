@@ -16,14 +16,4 @@ $(document).ready(function () {
     //     return event.key !== "Enter";
     // });
 
-
-    $('.input-group.timeframe #timeframe').datepicker({
-        maxViewMode: 'years',
-        minViewMode: 'months',
-        format: "MM yyyy",
-        autoClose: true,
-        // startView: 1,
-        // maxViewMode: 1
-    });
-
 });

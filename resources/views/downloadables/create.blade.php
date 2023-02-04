@@ -137,10 +137,9 @@
         </div>
     </div>
 
-{{--    @push('scripts')--}}
-{{--        <script>--}}
-{{--            --}}
-{{--        </script>--}}
-{{--    @endpush()--}}
+    @push('scripts')
+        <script>
+        </script>
+    @endpush()
 
 @endsection
