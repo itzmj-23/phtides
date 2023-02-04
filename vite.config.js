@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import inject from '@rollup/plugin-inject';
 
 export default defineConfig({
     plugins: [
@@ -10,6 +11,12 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        inject({
+            //Remember to add `"jquery": "^3.6.1"` in `dependencies` for `package.json`
+            jQuery: "jquery",
+            // "window.jQuery": "jquery",
+            $: "jquery"
+        })
     ],
     server: {
         host: '0.0.0.0',

@@ -6,6 +6,7 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
+        "@rollup/plugin-inject": "^5.0.3",
         "autoprefixer": "^10.4.13",
         "axios": "^1.1.2",
         "bootstrap": "^5.2.3",
@@ -19,6 +20,8 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.2.1",
         "bootstrap-tagsinput": "^0.7.1",
-        "daisyui": "^2.43.0"
+        "daisyui": "^2.43.0",
+        "jquery": "^3.6.3",
+        "jquery-ui-dist": "^1.13.2"
     }
 }
