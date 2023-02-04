@@ -3,9 +3,9 @@ import 'laravel-datatables-vite';
 
 import './bootstrap-tagsinput';
 
-import './custom-tagsinput';
-
 import './bootstrap-datepicker.min';
+
+import './custom-tagsinput';
 
 import '../css/bootstrap-tagsinput.css';
 
