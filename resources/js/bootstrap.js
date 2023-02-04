@@ -1,8 +1,6 @@
 import _ from 'lodash';
 window._ = _;
 
-window.require = () => {}
-
 import 'bootstrap';
 
 /**
