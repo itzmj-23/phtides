@@ -148,7 +148,7 @@ class DownloadablesController extends Controller
 
     public function download($id, $collection_name, $timeframe)
     {
-        $downloads = Downloadables::where('location_id', $id)
+        $downloads = Downloadables::where('id', $id)
             ->where('timeframe', $timeframe)
             ->where('category', $collection_name)->first();
 
