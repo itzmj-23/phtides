@@ -38,7 +38,7 @@ Route::get('/downloads/locations/hi-low/secondary', [DownloadablesController::cl
 Route::get('/downloads/locations/{id}/{collection_name}', [DownloadablesController::class, 'locationDownloadables']);
 
 
-Route::get('/downloads/{id}/{collection_name}/{timeframe}', [DownloadablesController::class, 'download']);
+Route::get('/downloads/{id}/{collection_name}/{timeframe}', [DownloadablesController::class, 'download'])->name('downloads');
 
 // ------------- LOCATION --------------------
 Route::get('/locations', [LocationController::class, 'apiLocation']);

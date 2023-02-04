@@ -25,7 +25,7 @@ class DownloadablesDataTable extends DataTable
                 $mediaItems = $query->getRegisteredMediaCollections();
 //                $mediaItems += $query->getMedia('primary-hi-low');
 
-                return $this->getActionColumns($query['id'], $mediaItems->count());
+                return $this->getActionColumns($query['id'], $query['category'], $query['timeframe'], $mediaItems->count());
 
             })
             ->editColumn('location', function ($query) {
@@ -81,10 +81,10 @@ class DownloadablesDataTable extends DataTable
         ];
     }
 
-    protected function getActionColumns($id, $mediaCount)
+    protected function getActionColumns($id, $category, $timeframe, $mediaCount)
     {
         if ($mediaCount > 0) {
-            $downloadAttachmentsURL = route('downloads.resources', $id);
+            $downloadAttachmentsURL = route('downloads', [$id, $category, $timeframe]);
 
             return '<form method="GET" action="' . $downloadAttachmentsURL . '">
                 <input type="hidden" name="_token" value="' . @csrf_token() . '" />
