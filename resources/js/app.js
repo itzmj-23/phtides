@@ -5,7 +5,7 @@ import './bootstrap-tagsinput';
 
 import './custom-tagsinput';
 
-import '../js/bootstrap-datepicker.min';
+import './bootstrap-datepicker.min';
 
 import '../css/bootstrap-tagsinput.css';
 
