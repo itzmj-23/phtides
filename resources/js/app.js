@@ -9,7 +9,7 @@ import './custom-tagsinput';
 
 import '../css/bootstrap-tagsinput.css';
 
-
+import '../css/bootstrap-datepicker.css';
 
 import.meta.glob([
     '../images/**',

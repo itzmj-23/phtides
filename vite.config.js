@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import inject from '@rollup/plugin-inject';
-import {esbuildCommonjs} from "@originjs/vite-plugin-commonjs";
 
 export default defineConfig({
     plugins: [
@@ -9,7 +8,6 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
-                'resources/css/app.css'
             ],
             refresh: true,
         }),
@@ -20,13 +18,6 @@ export default defineConfig({
             $: "jquery"
         })
     ],
-    optimizeDeps: {
-        esbuildOptions: {
-            plugins: [
-                esbuildCommonjs(['bootstrap-datepicker'])
-            ]
-        }
-    },
     server: {
         host: '0.0.0.0',
         // host,
