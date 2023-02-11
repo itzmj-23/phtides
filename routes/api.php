@@ -4,6 +4,7 @@ use App\Http\Controllers\DownloadablesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
 use App\Http\Controllers\PredictedHiLowController;
+use App\Http\Controllers\SunriseSunsetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,7 @@ Route::get('/downloads/{id}/{collection_name}/{timeframe}', [DownloadablesContro
 // ------------- LOCATION --------------------
 Route::get('/locations', [LocationController::class, 'apiLocation']);
 Route::get('/locations/{id}', [LocationController::class, 'apiLocationByID']);
+
+
+// ------------- SUNRISE SUNSET --------------------
+Route::get('/sunrise-sunset/{id}', [SunriseSunsetController::class, 'apiSunriseSunsetByLocation']);
