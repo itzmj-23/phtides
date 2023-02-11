@@ -24,7 +24,7 @@ class SunriseSunsetController extends Controller
 
     public function create()
     {
-        $locations = Location::all();
+        $locations = Location::orderBy('name')->get();
 
         return view('sunrise-sunset.create', [
             'locations' => $locations,

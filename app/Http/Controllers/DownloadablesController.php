@@ -24,7 +24,7 @@ class DownloadablesController extends Controller
 
     public function create()
     {
-        $locations = Location::all();
+        $locations = Location::orderBy('name')->get();
 
         return view('downloadables.create', [
             'locations' => $locations,

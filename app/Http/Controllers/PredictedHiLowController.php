@@ -24,7 +24,7 @@ class PredictedHiLowController extends Controller
 
     public function create()
     {
-        $locations = Location::all();
+        $locations = Location::orderBy('name')->get();
 
         return view('predicted_hi_lows.create', [
             'locations' => $locations,

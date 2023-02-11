@@ -28,7 +28,7 @@ class PredictedHourlyHeightsController extends Controller
 
     public function create()
     {
-        $locations = Location::all();
+        $locations = Location::orderBy('name')->get();
 
         return view('predicted_hourly_heights.create', [
            'locations' => $locations,
