@@ -110,6 +110,7 @@ class DownloadablesController extends Controller
             ->whereHas('downloadables', function($q) {
                 $q->where('category', 'primary-hourly-heights');
             })
+            ->orderBy('name')
             ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
@@ -125,6 +126,7 @@ class DownloadablesController extends Controller
             ->whereHas('downloadables', function($q) {
                 $q->where('category', 'primary-hi-low');
             })
+            ->orderBy('name')
             ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
@@ -140,6 +142,7 @@ class DownloadablesController extends Controller
             ->whereHas('downloadables', function($q) {
                 $q->where('category', 'secondary-hourly-heights');
             })
+            ->orderBy('name')
             ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
@@ -155,6 +158,7 @@ class DownloadablesController extends Controller
             ->whereHas('downloadables', function($q) {
                 $q->where('category', 'secondary-hi-low');
             })
+            ->orderBy('name')
             ->get(['id', 'name']);
 
         return response($locationWithDownloadables);
@@ -165,6 +169,7 @@ class DownloadablesController extends Controller
         $data = Downloadables::whereHas('location')
             ->whereRelation('location', 'id', $id)
             ->where('category', $category)
+            ->orderBy('name')
             ->get();
 
         return response($data);
