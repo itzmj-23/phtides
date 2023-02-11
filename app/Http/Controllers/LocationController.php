@@ -154,7 +154,7 @@ class LocationController extends Controller
     public function apiLocation()
     {
         try {
-            $data = Location::has('predicted_hourly_heights')->get(['id', 'code', 'name', 'location']);
+            $data = Location::has('predicted_hourly_heights')->orderBy('name')->get(['id', 'code', 'name', 'location']);
 
             return response($data);
 
