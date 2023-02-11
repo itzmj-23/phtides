@@ -49,6 +49,11 @@ class Location extends Model
         return $this->hasMany(PredictedHiLow::class);
     }
 
+    public function sunrise_sunset()
+    {
+        return $this->hasMany(SunriseSunset::class);
+    }
+
     public function downloadables()
     {
         return $this->hasMany(Downloadables::class);

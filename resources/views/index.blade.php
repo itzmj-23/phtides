@@ -29,6 +29,17 @@
             <div class="col col-lg-3 py-3">
                 <div class="card">
                     <div class="card-body">
+                        <i class="fas fa-cloud-sun fa-4x"></i>
+                        <h2 class="card-title mx-auto">Sunrise Sunset</h2>
+                        <div class="card-actions justify-center mt-5">
+                            <a href="{{ route('sunrise-sunset.index') }}" class="btn btn-primary">Go Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-3 py-3">
+                <div class="card">
+                    <div class="card-body">
                         <i class="fa-solid fa-map-location fa-4x"></i>
                         <h2 class="card-title mx-auto">Location Data</h2>
                         <div class="card-actions justify-center mt-5">
@@ -48,17 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col col-lg-3 py-3">
-                <div class="card">
-                    <div class="card-body">
-                        <i class="fa-solid fa-file-alt fa-4x"></i>
-                        <h2 class="card-title mx-auto">API Doc</h2>
-                        <div class="card-actions justify-center mt-5">
-                            <a href="{{ route('api_doc.index') }}" class="btn btn-primary">Go Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 

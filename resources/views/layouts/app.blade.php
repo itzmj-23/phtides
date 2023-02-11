@@ -25,8 +25,8 @@
                 <li class="nav-item"><a class="nav-link active" href="{{ route('predicted_hi_lows.index') }}">Predicted Hi & Low Waters</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('predicted_hourly_heights.index') }}">Predicted Hourly Heights</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('location.index') }}">Locations</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('sunrise-sunset.index') }}">Sunrise/Sunset</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('downloads.index') }}">Downloadable Resources</a></li>
-                <li class="nav-item"><a class="nav-link active" href="{{ route('api_doc.index') }}">API Docs</a></li>
             </ul>
         </div>
     </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\DownloadablesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHiLowController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
+use App\Http\Controllers\SunriseSunsetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,11 @@ Route::get('location/create', [LocationController::class, 'create'])->name('loca
 Route::post('location', [LocationController::class, 'store'])->name('location.store');
 Route::get('location/{id}', [LocationController::class, 'show'])->name('location.show');
 Route::put('location/{id}', [LocationController::class, 'update'])->name('location.update');
+
+// SUNRISE SUNSET ROUTE
+Route::get('sunrise-sunset', [SunriseSunsetController::class, 'index'])->name('sunrise-sunset.index');
+Route::get('sunrise-sunset/create', [SunriseSunsetController::class, 'create'])->name('sunrise-sunset.create');
+Route::post('sunrise-sunset', [SunriseSunsetController::class, 'store'])->name('sunrise-sunset.store');
 
 // DOWNLOADABLES ROUTE
 Route::get('downloads', [DownloadablesController::class, 'index'])->name('downloads.index');
