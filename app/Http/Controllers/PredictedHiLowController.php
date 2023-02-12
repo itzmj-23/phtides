@@ -14,7 +14,7 @@ class PredictedHiLowController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('apiPredictedHiLowsByLocation');
     }
 
     public function index(PredictedHiLowsDataTable $dataTable)

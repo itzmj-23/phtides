@@ -14,7 +14,7 @@ class DownloadablesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('primaryHourlyHeightsLoc', 'primaryHiLowLoc', 'secondaryHourlyHeightsLoc', 'secondaryHiLowLoc', 'locationDownloadables', 'download');
     }
 
     public function index(DownloadablesDataTable $dataTable)
@@ -102,12 +102,12 @@ class DownloadablesController extends Controller
 
     public function primaryHourlyHeightsLoc()
     {
-        $locationWithDownloadables = Location::with(['downloadables' => function($q) {
+        $locationWithDownloadables = Location::with(['downloadables' => function ($q) {
             $q->where('category', 'primary-hourly-heights');
             $q->select(['id', 'location_id', 'category', 'timeframe']);
         }
         ])
-            ->whereHas('downloadables', function($q) {
+            ->whereHas('downloadables', function ($q) {
                 $q->where('category', 'primary-hourly-heights');
             })
             ->orderBy('name')
@@ -118,12 +118,12 @@ class DownloadablesController extends Controller
 
     public function primaryHiLowLoc()
     {
-        $locationWithDownloadables = Location::with(['downloadables' => function($q) {
+        $locationWithDownloadables = Location::with(['downloadables' => function ($q) {
             $q->where('category', 'primary-hi-low');
             $q->select(['id', 'location_id', 'category', 'timeframe']);
         }
         ])
-            ->whereHas('downloadables', function($q) {
+            ->whereHas('downloadables', function ($q) {
                 $q->where('category', 'primary-hi-low');
             })
             ->orderBy('name')
@@ -134,12 +134,12 @@ class DownloadablesController extends Controller
 
     public function secondaryHourlyHeightsLoc()
     {
-        $locationWithDownloadables = Location::with(['downloadables' => function($q) {
+        $locationWithDownloadables = Location::with(['downloadables' => function ($q) {
             $q->where('category', 'secondary-hourly-heights');
             $q->select(['id', 'location_id', 'category', 'timeframe']);
         }
         ])
-            ->whereHas('downloadables', function($q) {
+            ->whereHas('downloadables', function ($q) {
                 $q->where('category', 'secondary-hourly-heights');
             })
             ->orderBy('name')
@@ -150,12 +150,12 @@ class DownloadablesController extends Controller
 
     public function secondaryHiLowLoc()
     {
-        $locationWithDownloadables = Location::with(['downloadables' => function($q) {
+        $locationWithDownloadables = Location::with(['downloadables' => function ($q) {
             $q->where('category', 'secondary-hi-low');
             $q->select(['id', 'location_id', 'category', 'timeframe']);
         }
         ])
-            ->whereHas('downloadables', function($q) {
+            ->whereHas('downloadables', function ($q) {
                 $q->where('category', 'secondary-hi-low');
             })
             ->orderBy('name')
