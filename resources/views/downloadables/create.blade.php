@@ -62,18 +62,24 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <label class="label">
-                                    <span class="label-text">Month Year</span>
+                                    <span class="label-text">Resource Title</span>
                                     <span class="label-text-alt">*</span>
                                 </label>
                             </div>
                             <div class="col">
                                 <div class="input-group timeframe">
-                                    <input id="timeframe" name="timeframe" type="text" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Choose date and month">
+                                    <input id="" name="timeframe" type="text" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Resource title in downloading the file. Ex: Jan-Feb 2023 or Sunrise Sunset 2023">
                                     @error('timeframe')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+{{--                                    <input id="timeframe" name="timeframe" type="text" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Choose date and month">--}}
+{{--                                    @error('timeframe')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                            <strong>{{ $message }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                    @enderror--}}
                                 </div>
                             </div>
                         </div>
@@ -91,6 +97,7 @@
                                     <option value="primary-hi-low">Primary Tide Stations - Hi and Low Waters</option>
                                     <option value="secondary-hourly-heights">Secondary Tide Stations - Hourly Heights</option>
                                     <option value="secondary-hi-low">Secondary Tide Stations - Hi and Low Waters</option>
+                                    <option value="astronomical">Astronomical Data</option>
                                 </select>
                                 @error('collection_name')
                                 <span class="invalid-feedback" role="alert">

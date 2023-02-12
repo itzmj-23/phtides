@@ -38,6 +38,7 @@ Route::get('/downloads/locations/hi-low/primary', [DownloadablesController::clas
 Route::get('/downloads/locations/hi-low/secondary', [DownloadablesController::class, 'secondaryHiLowLoc']);
 Route::get('/downloads/locations/{id}/{collection_name}', [DownloadablesController::class, 'locationDownloadables']);
 
+Route::get('/downloads/locations/astronomical', [DownloadablesController::class, 'astronomical']);
 
 Route::get('/downloads/{id}/{collection_name}/{timeframe}', [DownloadablesController::class, 'download'])->name('downloads');
 

@@ -14,7 +14,11 @@ class DownloadablesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('primaryHourlyHeightsLoc', 'primaryHiLowLoc', 'secondaryHourlyHeightsLoc', 'secondaryHiLowLoc', 'locationDownloadables', 'download');
+        $this->middleware('auth')
+            ->except(
+                'primaryHourlyHeightsLoc', 'primaryHiLowLoc', 'secondaryHourlyHeightsLoc',
+                'secondaryHiLowLoc', 'locationDownloadables', 'download', 'astronomical'
+            );
     }
 
     public function index(DownloadablesDataTable $dataTable)
@@ -173,6 +177,22 @@ class DownloadablesController extends Controller
             ->get();
 
         return response($data);
+    }
+
+    public function astronomical()
+    {
+        $locationWithDownloadables = Location::with(['downloadables' => function ($q) {
+            $q->where('category', 'astronomical');
+            $q->select(['id', 'location_id', 'category', 'timeframe']);
+        }
+        ])
+            ->whereHas('downloadables', function ($q) {
+                $q->where('category', 'astronomical');
+            })
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        return response($locationWithDownloadables);
     }
 
     public function download($id, $collection_name, $timeframe)
