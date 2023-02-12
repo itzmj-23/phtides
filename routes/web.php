@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\DownloadablesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHiLowController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
 use App\Http\Controllers\SunriseSunsetController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +21,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ----------------- AUTH ROUTES ------------------------------
+
+Auth::routes(['verify' => true]);
+
+// -------------------------------------------------------------------
+
+
+//Route::get('/', [HomeController::class, 'index']);
 Route::get('/', function () {
     return view('index');
-});
+})->middleware(['auth', 'verified']);
 
 // PREDICTED HOURLY HEIGHTS
 Route::get('predicted-hourly-heights', [PredictedHourlyHeightsController::class, 'index'])->name('predicted_hourly_heights.index');
@@ -54,3 +64,5 @@ Route::get('downloads/{id}', [DownloadablesController::class, 'download'])->name
 
 // API DOC ROUTE
 Route::get('api-doc-v1/', [APIController::class, 'index'])->name('api_doc.index');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
