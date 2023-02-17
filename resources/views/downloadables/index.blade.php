@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        td, th {
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
 
     <div class="container mb-4">
         <div class="mt-5 text-center">

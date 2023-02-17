@@ -17,7 +17,7 @@ class DownloadablesController extends Controller
         $this->middleware('auth')
             ->except(
                 'primaryHourlyHeightsLoc', 'primaryHiLowLoc', 'secondaryHourlyHeightsLoc',
-                'secondaryHiLowLoc', 'locationDownloadables', 'download', 'astronomical'
+                'secondaryHiLowLoc', 'locationDownloadables', 'download', 'astronomical', 'viewPDF',
             );
     }
 
@@ -213,5 +213,18 @@ class DownloadablesController extends Controller
                 return $media;
             }
         }
+    }
+
+    public function viewPDF($id, $collection_name, $timeframe)
+    {
+        $downloads = Downloadables::where('id', $id)
+            ->where('timeframe', $timeframe)
+            ->where('category', $collection_name)->first();
+
+        $mediaItems = $downloads->getMedia($collection_name);
+
+        return response()->file($mediaItems[0]->getPath(), [
+            'Content-Disposition' => 'inline; filename="'. $mediaItems[0]->file_name .'"'
+        ]);
     }
 }

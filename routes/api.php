@@ -41,6 +41,7 @@ Route::get('/downloads/locations/{id}/{collection_name}', [DownloadablesControll
 Route::get('/downloads/locations/astronomical', [DownloadablesController::class, 'astronomical']);
 
 Route::get('/downloads/{id}/{collection_name}/{timeframe}', [DownloadablesController::class, 'download'])->name('downloads');
+Route::get('/downloads/{id}/{collection_name}/{timeframe}/view', [DownloadablesController::class, 'viewPDF'])->name('downloads.view.pdf');
 
 // ------------- LOCATION --------------------
 Route::get('/locations', [LocationController::class, 'apiLocation']);

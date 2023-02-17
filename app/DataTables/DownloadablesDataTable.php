@@ -85,11 +85,11 @@ class DownloadablesDataTable extends DataTable
     {
         if ($mediaCount > 0) {
             $downloadAttachmentsURL = route('downloads', [$id, $category, $timeframe]);
+            $viewPDF = route('downloads.view.pdf', [$id, $category, $timeframe]);
 
-            return '<form method="GET" action="' . $downloadAttachmentsURL . '">
-                <button type="submit" class="btn btn-success btn-sm">
-                <i class="fas fa-download"></i> Download</button>
-                </form>
+            return '
+                <div class="col"><a href="'. $viewPDF .'" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> View</a></div>
+                <div class="col"><a href="'. $downloadAttachmentsURL .'" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Download</a></div>
                 ';
         }
 

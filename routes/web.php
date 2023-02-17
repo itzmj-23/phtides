@@ -33,6 +33,7 @@ Route::get('/', function () {
     return view('index');
 })->middleware(['auth', 'verified']);
 
+
 // PREDICTED HOURLY HEIGHTS
 Route::get('predicted-hourly-heights', [PredictedHourlyHeightsController::class, 'index'])->name('predicted_hourly_heights.index');
 Route::get('predicted-hourly-heights/create', [PredictedHourlyHeightsController::class, 'create'])->name('predicted_hourly_heights.create');
