@@ -86,13 +86,22 @@ class DownloadablesDataTable extends DataTable
         if ($mediaCount > 0) {
             $downloadAttachmentsURL = route('downloads', [$id, $category, $timeframe]);
             $viewPDF = route('downloads.view.pdf', [$id, $category, $timeframe]);
+            $editRoute = route('downloads.edit', [$id]);
+            $deleteRoute = route('downloads.destroy', [$id]);
 
-            return '
-                <div class="col"><a href="'. $viewPDF .'" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> View</a></div>
-                <div class="col"><a href="'. $downloadAttachmentsURL .'" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Download</a></div>
-                ';
+            $viewBtn = '<a href="' .$viewPDF. '" class="btn btn-primary me-1" target="_blank" rel="noopener noreferrer"> View</a>';
+            $editBtn = '<a href="' .$editRoute. '" class="btn btn-secondary me-1"> Edit</a>';
+            $deleteBtn = '<form action="' .$deleteRoute.'" method="POST">
+                            '.csrf_field().'
+                            '.method_field('DELETE').'
+                            <button type="submit" class="btn btn-danger"> Delete</button>
+                            </form>';
+            $downloadBtn = '<a href="'. $downloadAttachmentsURL .'" class="btn btn-success me-1">Download</a>';
+
+            return '<div class="d-flex flex-row">'.
+                $viewBtn . $downloadBtn . $editBtn . $deleteBtn
+                .'</div>';
         }
-
     }
 
     protected function filename(): string

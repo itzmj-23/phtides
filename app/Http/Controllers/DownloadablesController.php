@@ -89,19 +89,99 @@ class DownloadablesController extends Controller
         //
     }
 
-    public function edit(Downloadables $downloadables)
+    public function edit(Downloadables $downloadables, $id)
     {
-        //
+//        dd($downloadables->find($id));
+        $data = $downloadables->find($id);
+        $locations = Location::orderBy('name')->get();
+        $media = $data->getMedia($data['category']);
+        $mediaItem = $media->last();
+        $filename = $mediaItem['file_name'];
+
+        return view('downloadables.edit', [
+            'data' => $data,
+            'locations' => $locations,
+            'filename' => $filename,
+        ]);
     }
 
-    public function update(Request $request, Downloadables $downloadables)
+    public function showUploadedPDF($id)
     {
-        //
+        $model = Downloadables::find($id);
+        $media = $model->getMedia($model['category']);
+        $mediaItem = $media->last();
+
+        return response()->file($mediaItem->getPath(), [
+            'Content-Disposition' => 'inline; filename="'. $mediaItem->file_name .'"'
+        ]);
     }
 
-    public function destroy(Downloadables $downloadables)
+    public function update(Request $request, Downloadables $downloadables, $id)
     {
-        //
+//        dd($request->all());
+        $validated = $request->validate([
+            'timeframe' => 'required',
+            'description' => 'max:250',
+            'file' => [
+                'required',
+                'mimes:pdf',
+                'max:20480'],
+            'location_id' => 'required',
+            'collection_name' => 'required',
+        ], [
+            'file.max' => 'The file must not be greater that 20MB.',
+            'location_id.required' => 'The location field is required.',
+            'collection_name.required' => 'The category field is required.',
+            'timeframe.required' => 'The month year field is required.',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $downloadable = $downloadables->find($id);
+            $downloadable->update($validated);
+
+            if ($request->hasFile('file')) {
+                $downloadable->addMedia($request['file'])
+                    ->usingName($request['file']->getClientOriginalName())
+                    ->usingFileName($request['file']->getClientOriginalName())
+                    ->toMediaCollection($request['collection_name'], 'local_media');
+            }
+
+            DB::commit();
+
+            toastr()->success('Updated successfully!', 'Update');
+            return redirect()->route('downloads.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            return redirect()->back();
+        }
+    }
+
+    public function destroy(Downloadables $downloadables, $id)
+    {
+        $model = $downloadables->find($id);
+
+
+        try {
+            DB::beginTransaction();
+
+            $model->delete();
+
+            DB::commit();
+            toastr()->success('Deleted successfully!', 'Delete');
+            return redirect()->route('downloads.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            return redirect()->back();
+        }
+//
+//        $media = $model->getMedia($model['category']);
+//        $media[0]->delete();
     }
 
     public function primaryHourlyHeightsLoc()
@@ -201,18 +281,9 @@ class DownloadablesController extends Controller
             ->where('timeframe', $timeframe)
             ->where('category', $collection_name)->first();
 
-        $mediaItems = $downloads->getMedia($collection_name);
+        $media = $downloads->getMedia($collection_name);
 
-        foreach ($mediaItems as $media) {
-            $media->file_name = $media->name;
-            $media->save();
-
-            if (count($mediaItems) > 1) {
-                return MediaStream::create($downloads['name'] . '.zip')->addMedia($mediaItems);
-            } else {
-                return $media;
-            }
-        }
+        return $media->last();
     }
 
     public function viewPDF($id, $collection_name, $timeframe)
@@ -221,10 +292,11 @@ class DownloadablesController extends Controller
             ->where('timeframe', $timeframe)
             ->where('category', $collection_name)->first();
 
-        $mediaItems = $downloads->getMedia($collection_name);
+        $media = $downloads->getMedia($collection_name);
+        $mediaItem = $media->last();
 
-        return response()->file($mediaItems[0]->getPath(), [
-            'Content-Disposition' => 'inline; filename="'. $mediaItems[0]->file_name .'"'
+        return response()->file($mediaItem->getPath(), [
+            'Content-Disposition' => 'inline; filename="'. $mediaItem->file_name .'"'
         ]);
     }
 }

@@ -61,6 +61,11 @@ Route::get('downloads', [DownloadablesController::class, 'index'])->name('downlo
 Route::get('downloads/create', [DownloadablesController::class, 'create'])->name('downloads.create');
 Route::post('downloads', [DownloadablesController::class, 'store'])->name('downloads.store');
 Route::get('downloads/{id}/show', [DownloadablesController::class, 'show'])->name('downloads.show');
+Route::get('downloads/{id}/edit', [DownloadablesController::class, 'edit'])->name('downloads.edit');
+Route::get('downloads/{id}/edit/show-uploaded-pdf', [DownloadablesController::class, 'showUploadedPDF'])->name('downloads.edit.showUploadedPDF');
+Route::put('downloads/{id}', [DownloadablesController::class, 'update'])->name('downloads.update');
+Route::delete('downloads/{id}', [DownloadablesController::class, 'destroy'])->name('downloads.destroy');
+
 Route::get('downloads/{id}', [DownloadablesController::class, 'download'])->name('downloads.resources');
 
 // API DOC ROUTE
