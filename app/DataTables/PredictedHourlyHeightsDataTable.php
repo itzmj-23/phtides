@@ -45,6 +45,7 @@ class PredictedHourlyHeightsDataTable extends DataTable
 //                    ->dom('Bfrtip')
                     ->orderBy(0,'asc')
                     ->selectStyleSingle()
+                    ->lengthMenu([50, 100, 500, 1000])
                     ->buttons([
 //                        Button::make('excel'),
 //                        Button::make('csv'),
@@ -66,8 +67,8 @@ class PredictedHourlyHeightsDataTable extends DataTable
             Column::make('id'),
             Column::make('date'),
             Column::make('hour'),
-            Column::make('location'),
-            Column::make('uploaded_on'),
+            Column::make('location', 'location.name'),
+            Column::make('uploaded_on')->searchable(false),
         ];
     }
 

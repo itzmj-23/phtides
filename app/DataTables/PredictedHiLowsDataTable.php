@@ -63,7 +63,7 @@ class PredictedHiLowsDataTable extends DataTable
                     //->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
-                    ->lengthMenu([50, 100, 1000])
+                    ->lengthMenu([50, 100, 500, 1000])
                     ->buttons([
 //                        Button::make('excel'),
 //                        Button::make('csv'),

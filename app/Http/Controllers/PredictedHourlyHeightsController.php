@@ -6,6 +6,7 @@ use App\DataTables\PredictedHourlyHeightsDataTable;
 use App\Imports\PredictedHourlyHeightsImport;
 use App\Models\Location;
 use App\Models\PredictedHourlyHeights;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -53,6 +54,59 @@ class PredictedHourlyHeightsController extends Controller
 
             DB::commit();
             toastr()->success('Data has been saved successfully!', 'Success');
+            return redirect()->route('predicted_hourly_heights.index');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            toastr()->error($e->getMessage(), 'Error');
+            return back();
+        }
+    }
+
+    public function removalData(Request $request)
+    {
+        if ($request->method() == 'POST') {
+
+            $id = $request['id'];
+
+            $data = PredictedHourlyHeights::where('location_id', $id)
+                ->pluck('date')
+                ->map(function ($date) {
+                    return Carbon::parse($date)->format('Y');
+                })
+                ->unique();
+
+            return response()->json($data);
+        }
+
+        $locations = Location::whereHas('predicted_hourly_heights')->get();
+
+        return view('predicted_hourly_heights.removal-data', [
+            'locations' => $locations,
+        ]);
+    }
+
+    public function submitRemovalData(Request $request)
+    {
+        $validated = $request->validate([
+            'location_id' => 'required',
+            'year' => 'required',
+        ],[
+            'location_id.required' => 'The location field is required',
+        ]);
+
+//        dd($validated);
+
+        try {
+            DB::beginTransaction();
+
+            PredictedHourlyHeights::where('location_id', $validated['location_id'])->
+            where('date', 'LIKE', '%'.$validated['year'])
+                ->delete();
+
+
+            DB::commit();
+            toastr()->success('Data has been deleted.!', 'Deletion');
             return redirect()->route('predicted_hourly_heights.index');
 
         } catch (\Exception $e) {

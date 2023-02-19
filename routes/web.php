@@ -38,6 +38,8 @@ Route::get('/', function () {
 Route::get('predicted-hourly-heights', [PredictedHourlyHeightsController::class, 'index'])->name('predicted_hourly_heights.index');
 Route::get('predicted-hourly-heights/create', [PredictedHourlyHeightsController::class, 'create'])->name('predicted_hourly_heights.create');
 Route::post('predicted-hourly-heights', [PredictedHourlyHeightsController::class, 'store'])->name('predicted_hourly_heights.store');
+Route::match(['get', 'post'],'predicted-hourly-heights/removal-data', [PredictedHourlyHeightsController::class, 'removalData'])->name('predicted_hourly_heights.removalData');
+Route::post('predicted-hourly-heights/submit-removal-data', [PredictedHourlyHeightsController::class, 'submitRemovalData'])->name('predicted_hourly_heights.submitRemovalData');
 
 // PREDICTED HI & LOW WATERS
 Route::get('predicted-hi-lows', [PredictedHiLowController::class, 'index'])->name('predicted_hi_lows.index');
