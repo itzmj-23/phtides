@@ -43,6 +43,11 @@ Route::post('predicted-hourly-heights', [PredictedHourlyHeightsController::class
 Route::get('predicted-hi-lows', [PredictedHiLowController::class, 'index'])->name('predicted_hi_lows.index');
 Route::get('predicted-hi-lows/create', [PredictedHiLowController::class, 'create'])->name('predicted_hi_lows.create');
 Route::post('predicted-hi-lows', [PredictedHiLowController::class, 'store'])->name('predicted_hi_lows.store');
+Route::get('predicted-hi-lows/{id}/edit', [PredictedHiLowController::class, 'edit'])->name('predicted_hi_lows.edit');
+Route::put('predicted-hi-lows/{id}', [PredictedHiLowController::class, 'update'])->name('predicted_hi_lows.update');
+Route::delete('predicted-hi-lows/{id}', [PredictedHiLowController::class, 'destroy'])->name('predicted_hi_lows.destroy');
+Route::match(['get', 'post'],'predicted-hi-lows/removal-data', [PredictedHiLowController::class, 'removalData'])->name('predicted_hi_lows.removalData');
+Route::post('predicted-hi-lows/submit-removal-data', [PredictedHiLowController::class, 'submitRemovalData'])->name('predicted_hi_lows.submitRemovalData');
 
 // LOCATION ROUTE
 Route::get('location', [LocationController::class, 'index'])->name('location.index');

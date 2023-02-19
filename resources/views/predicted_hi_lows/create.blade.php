@@ -5,7 +5,6 @@
     <div class="container mt-5 mb-3">
         <div class="text-center">
             <h1 class="">Predicted High and Low</h1>
-            <p class="">Predicted High and Low Management begins here</p>
         </div>
 
         <div class="card mt-4">

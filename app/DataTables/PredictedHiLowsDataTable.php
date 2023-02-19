@@ -26,8 +26,10 @@ class PredictedHiLowsDataTable extends DataTable
         $query = PredictedHiLow::with('location');
 
         return (new EloquentDataTable($query))
-//            ->addColumn('action', 'predictedhilows.action')
-            ->editColumn('location', function ($query) {
+//            ->addColumn('action', function ($query) {
+//                return $this->getActionColumns($query['id']);
+//            })
+            ->addColumn('locations', function ($query) {
                 return $query['location']['name'];
             })
             ->editColumn('uploaded_on', function ($query) {
@@ -61,6 +63,7 @@ class PredictedHiLowsDataTable extends DataTable
                     //->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
+                    ->lengthMenu([50, 100, 1000])
                     ->buttons([
 //                        Button::make('excel'),
 //                        Button::make('csv'),
@@ -84,12 +87,31 @@ class PredictedHiLowsDataTable extends DataTable
 //                  ->printable(false)
 //                  ->width(60)
 //                  ->addClass('text-center'),
+//            Column::make('action'),
             Column::make('id'),
             Column::make('date'),
             Column::make('hour'),
             Column::make('tide'),
-            Column::make('uploaded_on'),
+            Column::make('locations', 'location.name'),
+            Column::make('uploaded_on')->searchable(false),
         ];
+    }
+
+    protected function getActionColumns($id)
+    {
+            $editRoute = route('predicted_hi_lows.edit', [$id]);
+            $deleteRoute = route('predicted_hi_lows.destroy', [$id]);
+
+            $editBtn = '<a href="' .$editRoute. '" class="btn btn-secondary me-1"> Edit</a>';
+            $deleteBtn = '<form action="' .$deleteRoute.'" method="POST">
+                            '.csrf_field().'
+                            '.method_field('DELETE').'
+                            <button type="submit" class="btn btn-danger"> Delete</button>
+                            </form>';
+
+            return '<div class="d-flex flex-row">'.
+               $editBtn . $deleteBtn
+                .'</div>';
     }
 
     /**
