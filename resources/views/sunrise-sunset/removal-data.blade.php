@@ -4,7 +4,7 @@
 
     <div class="container mt-5 mb-3">
         <div class="text-center">
-            <h1 class="font-bold">Predicted Hourly Heights</h1>
+            <h1 class="font-bold">Sunrise Sunset</h1>
         </div>
 
         <div class="card mt-4">
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="mt-5">
-                    <form id="location_form" action="{{ route('predicted_hourly_heights.submitRemovalData') }}" method="POST">
+                    <form id="location_form" action="{{ route('sunrise-sunset.submitRemovalData') }}" method="POST">
                         @csrf
 {{--                        @method('DELETE')--}}
                         <div class="row mb-3">
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-block text-center">
-                            <a href="{{ route('predicted_hourly_heights.index') }}"6
+                            <a href="{{ route('sunrise-sunset.index') }}"
                                class="btn btn-link" type="button">Cancel</a>
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
@@ -86,7 +86,7 @@
 
                $("#location_id").change(function () {
                   let id = $(this).val();
-                   let url = "{{ route('predicted_hourly_heights.removalData', ":id") }}";
+                   let url = "{{ route('sunrise-sunset.removalData', ":id") }}";
                    url = url.replace(":id", id);
 
                    let formData = {

@@ -62,6 +62,8 @@ Route::put('location/{id}', [LocationController::class, 'update'])->name('locati
 Route::get('sunrise-sunset', [SunriseSunsetController::class, 'index'])->name('sunrise-sunset.index');
 Route::get('sunrise-sunset/create', [SunriseSunsetController::class, 'create'])->name('sunrise-sunset.create');
 Route::post('sunrise-sunset', [SunriseSunsetController::class, 'store'])->name('sunrise-sunset.store');
+Route::match(['get', 'post'], 'sunrise-sunset/removal-data', [SunriseSunsetController::class, 'removalData'])->name('sunrise-sunset.removalData');
+Route::post('sunrise-sunset/submit-removal-data', [SunriseSunsetController::class, 'submitRemovalData'])->name('sunrise-sunset.submitRemovalData');
 
 // DOWNLOADABLES ROUTE
 Route::get('downloads', [DownloadablesController::class, 'index'])->name('downloads.index');
