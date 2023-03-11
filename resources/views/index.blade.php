@@ -51,6 +51,17 @@
             <div class="col col-lg-3 py-3">
                 <div class="card">
                     <div class="card-body">
+                        <i class="fa-solid fa-calendar-alt fa-4x"></i>
+                        <h2 class="card-title mx-auto">Date Range</h2>
+                        <div class="card-actions justify-center mt-5">
+                            <a href="{{ route('date-range.index') }}" class="btn btn-primary">Go Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-3 py-3">
+                <div class="card">
+                    <div class="card-body">
                         <i class="fa-solid fa-file-pdf fa-4x"></i>
                         <h2 class="card-title mx-auto">Downloadable Resources</h2>
                         <div class="card-actions justify-center mt-5">

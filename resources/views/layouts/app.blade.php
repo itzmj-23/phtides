@@ -26,6 +26,7 @@
                         <li class="nav-item"><a class="nav-link active" href="{{ route('predicted_hourly_heights.index') }}">Predicted Hourly Heights</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{{ route('location.index') }}">Locations</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{{ route('sunrise-sunset.index') }}">Sunrise/Sunset</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{{ route('date-range.index') }}">Date Range</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{{ route('downloads.index') }}">Downloadable Resources</a></li>
                     </ul>
 

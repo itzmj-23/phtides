@@ -9,6 +9,7 @@ use App\Http\Controllers\PredictedHourlyHeightsController;
 use App\Http\Controllers\SunriseSunsetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DateRangeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,13 @@ Route::get('sunrise-sunset/create', [SunriseSunsetController::class, 'create'])-
 Route::post('sunrise-sunset', [SunriseSunsetController::class, 'store'])->name('sunrise-sunset.store');
 Route::match(['get', 'post'], 'sunrise-sunset/removal-data', [SunriseSunsetController::class, 'removalData'])->name('sunrise-sunset.removalData');
 Route::post('sunrise-sunset/submit-removal-data', [SunriseSunsetController::class, 'submitRemovalData'])->name('sunrise-sunset.submitRemovalData');
+
+// DATE RANGE
+Route::get('date-range/', [DateRangeController::class, 'index'])->name('date-range.index');
+Route::post('date-range/', [DateRangeController::class, 'update'])->name('date-range.update');
+
+
+
 
 // DOWNLOADABLES ROUTE
 Route::get('downloads', [DownloadablesController::class, 'index'])->name('downloads.index');
