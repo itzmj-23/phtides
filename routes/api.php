@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DateRangeController;
 use App\Http\Controllers\DownloadablesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
@@ -50,3 +51,6 @@ Route::get('/locations/{id}', [LocationController::class, 'apiLocationByID']);
 
 // ------------- SUNRISE SUNSET --------------------
 Route::get('/sunrise-sunset/{id}', [SunriseSunsetController::class, 'apiSunriseSunsetByLocation']);
+
+// ------------- DATE RANGE --------------------
+Route::get('/date-range', [DateRangeController::class, 'apiDateRange']);

@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('date_ranges', function (Blueprint $table) {
             $table->id();
+            $table->date('min_date');
+            $table->date('max_date');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
