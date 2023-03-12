@@ -14,7 +14,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Last Minimum Date</label>
                         <div class="col-sm-10 col-md-6 col-lg-4">
-                            <input class="form-control" type="text" value="{{ $data->min_date }}" disabled>
+                            <input class="form-control" type="text" value="{{ $data->min_date ?? 'No data yet' }}" disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -31,7 +31,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Last Maximum Date</label>
                         <div class="col-sm-10 col-md-6 col-lg-4">
-                            <input class="form-control" type="text" value="{{ $data->max_date }}" disabled>
+                            <input class="form-control" type="text" value="{{ $data->max_date ?? 'No data yet.' }}" disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -48,7 +48,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Last Update By</label>
                         <div class="col-sm-10 col-md-6 col-lg-4">
-                            <input class="form-control" type="text" value="{{ $data->updated_by }}" disabled>
+                            <input class="form-control" type="text" value="{{ $data->updated_by ?? 'No data yet.' }}" disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
