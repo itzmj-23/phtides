@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\APKController;
 use App\Http\Controllers\DateRangeController;
 use App\Http\Controllers\DownloadablesController;
 use App\Http\Controllers\LocationController;
@@ -54,3 +55,6 @@ Route::get('/sunrise-sunset/{id}', [SunriseSunsetController::class, 'apiSunriseS
 
 // ------------- DATE RANGE --------------------
 Route::get('/date-range', [DateRangeController::class, 'apiDateRange']);
+
+// ------------- APK --------------------
+Route::get('/apk-v1', [APKController::class, 'downloadAPK']);
