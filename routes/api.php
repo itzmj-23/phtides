@@ -57,4 +57,4 @@ Route::get('/sunrise-sunset/{id}', [SunriseSunsetController::class, 'apiSunriseS
 Route::get('/date-range', [DateRangeController::class, 'apiDateRange']);
 
 // ------------- APK --------------------
-Route::get('/apk-v1', [APKController::class, 'downloadAPK']);
+Route::get('/apk-v1', [APKController::class, 'downloadAPK'])->name('download.apk');
