@@ -299,4 +299,5 @@ class DownloadablesController extends Controller
             'Content-Disposition' => 'inline; filename="'. $mediaItem->file_name .'"'
         ]);
     }
+
 }

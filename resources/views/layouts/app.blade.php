@@ -28,6 +28,7 @@
                         <li class="nav-item"><a class="nav-link active" href="{{ route('sunrise-sunset.index') }}">Sunrise/Sunset</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{{ route('date-range.index') }}">Date Range</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{{ route('downloads.index') }}">Downloadable Resources</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{{ route('userManual.index') }}">User Manual</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{{ route('download.apk') }}">Download APK</a></li>
                     </ul>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
 use App\Http\Controllers\PredictedHiLowController;
 use App\Http\Controllers\SunriseSunsetController;
+use App\Http\Controllers\UserManualController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -58,3 +59,6 @@ Route::get('/date-range', [DateRangeController::class, 'apiDateRange']);
 
 // ------------- APK --------------------
 Route::get('/apk-v1', [APKController::class, 'downloadAPK'])->name('download.apk');
+
+// ------------- USER MANUAL --------------------
+Route::get('/downloads/user-manual', [UserManualController::class, 'downloadUserManual']);
