@@ -61,4 +61,4 @@ Route::get('/date-range', [DateRangeController::class, 'apiDateRange']);
 Route::get('/apk-v1', [APKController::class, 'downloadAPK'])->name('download.apk');
 
 // ------------- USER MANUAL --------------------
-Route::get('/downloads/user-manual', [UserManualController::class, 'downloadUserManual']);
+Route::get('/downloads/user-manual/{id}', [UserManualController::class, 'downloadUserManual'])->name('userManual.download');

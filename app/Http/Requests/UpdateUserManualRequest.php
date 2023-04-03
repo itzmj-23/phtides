@@ -25,6 +25,9 @@ class UpdateUserManualRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'file' => 'nullable',
+            'remarks' => 'nullable',
+            'uploaded_by' => 'required',
         ];
     }
 }

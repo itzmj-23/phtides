@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserManualRequest;
 use App\Http\Requests\UpdateUserManualRequest;
 use App\Models\UserManual;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -87,17 +88,72 @@ class UserManualController extends Controller
     }
 
 
-    public function update(UpdateUserManualRequest $request)
+    public function update(UpdateUserManualRequest $request, $id)
     {
         $validated = $request->validated();
 
-        dd($validated);
+        try {
+            DB::beginTransaction();
+
+            $data = UserManual::find($id);
+            $data->fill($validated);
+            $data->save();
+
+            if ($data) {
+                $data->addMedia($validated['file'])
+                    ->usingName($validated['file']->getClientOriginalName())
+                    ->usingFileName($validated['file']->getClientOriginalName())
+                    ->toMediaCollection('user-manual', 'local_media');
+
+                // Storage::disk('digitalocean')->putFileAs('reports', $request->file, $filename);
+
+                DB::commit();
+
+                toastr()->success('User Manual successfully updated!', 'Upload');
+                return redirect()->route('userManual.index');
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            return redirect()->back();
+        }
     }
 
 
-    public function destroy()
+    public function destroy($id)
     {
+        $data = UserManual::findOrFail($id);
 
+        try {
+            DB::beginTransaction();
+
+            $data = UserManual::find($id);
+
+            if ($data) {
+               $data->delete();
+
+                DB::commit();
+
+                toastr()->success('User Manual successfully deleted!', 'Upload');
+                return redirect()->route('userManual.index');
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            return redirect()->back();
+        }
+    }
+
+
+    public function downloadUserManual($id)
+    {
+        $data = UserManual::where('id', $id)->first();
+
+        $media = $data->getMedia('user-manual');
+
+        return $media->last();
     }
 
 

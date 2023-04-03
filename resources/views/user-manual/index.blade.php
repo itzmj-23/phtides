@@ -38,9 +38,13 @@
                             <tr>
                                 <td>
                                     <a target="_blank" href="{{ route('userManual.show', $data['id']) }}" class="btn btn-primary">View</a>
-                                    <a href="" class="btn btn-success">Download</a>
+                                    <a href="{{ route('userManual.download', $data['id']) }}" class="btn btn-success">Download</a>
                                     <a href="{{ route('userManual.edit', $data['id']) }}" class="btn btn-secondary">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
+                                    <form class="d-inline-block" action="{{ route('userManual.destroy', $data['id']) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                                 <td>{{ $data['title'] }}</td>
                                 <td>{{ $data['remarks'] }}</td>
