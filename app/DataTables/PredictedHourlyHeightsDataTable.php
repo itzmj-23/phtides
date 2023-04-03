@@ -21,6 +21,7 @@ class PredictedHourlyHeightsDataTable extends DataTable
         $query = PredictedHourlyHeights::with('location');
 
         return (new EloquentDataTable($query))
+            ->setTotalRecords(100)
             ->addColumn('action', 'predictedhourlyheights.action')
             ->editColumn('location', function ($query) {
                 return $query['location']['name'];
@@ -45,7 +46,7 @@ class PredictedHourlyHeightsDataTable extends DataTable
 //                    ->dom('Bfrtip')
                     ->orderBy(0,'asc')
                     ->selectStyleSingle()
-                    ->lengthMenu([50, 100, 500, 1000])
+                    ->lengthMenu([50, 50, 100, 500])
                     ->buttons([
 //                        Button::make('excel'),
 //                        Button::make('csv'),
