@@ -18,10 +18,10 @@ class PredictedHourlyHeightsDataTable extends DataTable
 
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        $query = PredictedHourlyHeights::with('location');
+//        $query = PredictedHourlyHeights::with('location');
 
         return (new EloquentDataTable($query))
-            ->setTotalRecords(100)
+//            ->setTotalRecords(100)
             ->addColumn('action', 'predictedhourlyheights.action')
             ->editColumn('location', function ($query) {
                 return $query['location']['name'];
@@ -34,7 +34,8 @@ class PredictedHourlyHeightsDataTable extends DataTable
 
     public function query(PredictedHourlyHeights $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->select(['id', 'date', 'hour', 'location_id', 'created_at'])
+            ->with('location:id,name');
     }
 
     public function html(): HtmlBuilder
