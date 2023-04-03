@@ -5,7 +5,6 @@
     <div class="container mx-auto">
         <div class="text-center mt-5">
             <h1 class="text-5xl font-bold">Location Data</h1>
-            <p class="py-6">Manage data in the Location</p>
         </div>
 
         <div class="card bg-base-100 shadow-xl mt-5">
@@ -33,6 +32,24 @@
                                 <input type="text" name="name" value="{{ old('name', $data['name']) }}" placeholder="Type here"
                                        class="form-control @error('name') is-invalid @enderror"/>
                                 @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label class="label">
+                                    <span class="label-text">Station Datum</span>
+                                    <span class="label-text-alt">(optional)</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="station_datum" value="{{ old('station_datum', $data['station_datum']) }}" placeholder="Type here"
+                                       class="form-control @error('station_datum') is-invalid @enderror"/>
+                                @error('station_datum')
                                 <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

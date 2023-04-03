@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\LocationsDataTable;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,13 +14,9 @@ class LocationController extends Controller
         $this->middleware('auth')->except('apiLocation', 'apiLocationByID');
     }
 
-    public function index()
+    public function index(LocationsDataTable $dataTable)
     {
-        $data = Location::all();
-
-        return view('location.index', [
-            'data' => $data,
-        ]);
+        return $dataTable->render('location.index');
     }
 
     public function create()
@@ -60,6 +57,7 @@ class LocationController extends Controller
             'controller' => 'nullable',
             'tgbm' => 'nullable',
             'tide_staff' => 'nullable',
+            'station_datum' => 'nullable',
         ]);
 
         try {

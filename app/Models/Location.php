@@ -24,6 +24,7 @@ class Location extends Model
         'tgbm',
         'tide_staff',
         'description',
+        'station_datum',
     ];
 
     protected $casts = [
