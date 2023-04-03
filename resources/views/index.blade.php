@@ -81,6 +81,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col col-lg-3 py-3">
+                <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-gavel fa-4x"></i>
+                        <h2 class="card-title mx-auto">Privacy Policy</h2>
+                        <div class="card-actions justify-center mt-5">
+                            <a href="{{ route('privacyPolicy.index') }}" class="btn btn-primary">Go Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

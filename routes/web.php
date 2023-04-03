@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHiLowController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\SunriseSunsetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +80,13 @@ Route::get('user-manual/{id}', [UserManualController::class, 'show'])->name('use
 Route::get('user-manual/{id}/edit', [UserManualController::class, 'edit'])->name('userManual.edit');
 Route::post('user-manual/{id}', [UserManualController::class, 'update'])->name('userManual.update');
 Route::delete('user-manual/{id}', [UserManualController::class, 'destroy'])->name('userManual.destroy');
+
+// PRIVACY POLICY
+Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacyPolicy.index');
+Route::get('privacy-policy/create', [PrivacyPolicyController::class, 'create'])->name('privacyPolicy.create');
+Route::post('privacy-policy', [PrivacyPolicyController::class, 'store'])->name('privacyPolicy.store');
+Route::get('privacy-policy/{id}/edit', [PrivacyPolicyController::class, 'edit'])->name('privacyPolicy.edit');
+Route::post('privacy-policy/{id}', [PrivacyPolicyController::class, 'update'])->name('privacyPolicy.update');
 
 
 // DOWNLOADABLES ROUTE

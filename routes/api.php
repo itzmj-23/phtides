@@ -6,6 +6,7 @@ use App\Http\Controllers\DownloadablesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PredictedHourlyHeightsController;
 use App\Http\Controllers\PredictedHiLowController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\SunriseSunsetController;
 use App\Http\Controllers\UserManualController;
 use Illuminate\Http\Request;
@@ -62,3 +63,6 @@ Route::get('/apk-v1', [APKController::class, 'downloadAPK'])->name('download.apk
 
 // ------------- USER MANUAL --------------------
 Route::get('/downloads/user-manual/{id}', [UserManualController::class, 'downloadUserManual'])->name('userManual.download');
+
+// ------------- PRIVACY POLICY --------------------
+Route::get('/privacy-policy/show', [PrivacyPolicyController::class, 'show'])->name('privacyPolicy.show');
