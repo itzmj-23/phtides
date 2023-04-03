@@ -46,7 +46,7 @@ class PredictedHourlyHeightsDataTable extends DataTable
 //                    ->dom('Bfrtip')
                     ->orderBy(0,'asc')
                     ->selectStyleSingle()
-                    ->lengthMenu([50, 50, 100, 500])
+                    ->lengthMenu([10, 50, 100, 500])
                     ->buttons([
 //                        Button::make('excel'),
 //                        Button::make('csv'),
