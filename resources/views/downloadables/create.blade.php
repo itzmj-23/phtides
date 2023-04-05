@@ -21,12 +21,36 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <label class="label">
+                                    <span class="label-text">Category</span>
+                                    <span class="label-text-alt">*</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <select id="collection_name" class="form-select @error('collection_name') is-invalid @enderror" name="collection_name">
+                                    <option disabled selected>Pick one</option>
+                                    <option value="primary-hourly-heights">Primary Tide Stations - Hourly Heights</option>
+                                    <option value="primary-hi-low">Primary Tide Stations - Hi and Low Waters</option>
+                                    <option value="secondary-hourly-heights">Secondary Tide Stations - Hourly Heights</option>
+                                    <option value="secondary-hi-low">Secondary Tide Stations - Hi and Low Waters</option>
+                                    <option value="astronomical">Astronomical Data</option>
+                                    <option value="moon-phases">Moon Phases</option>
+                                </select>
+                                @error('collection_name')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label class="label">
                                     <span class="label-text">Location</span>
                                     <span class="label-text-alt">*</span>
                                 </label>
                             </div>
                             <div class="col">
-                                <select class="form-select @error('location_id') is-invalid @enderror" name="location_id">
+                                <select id="location_id" class="form-select @error('location_id') is-invalid @enderror" name="location_id">
                                     <option disabled selected>Pick one</option>
                                     @foreach($locations as $location)
                                         <option
@@ -86,29 +110,6 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <label class="label">
-                                    <span class="label-text">Category</span>
-                                    <span class="label-text-alt">*</span>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <select class="form-select @error('collection_name') is-invalid @enderror" name="collection_name">
-                                    <option disabled selected>Pick one</option>
-                                    <option value="primary-hourly-heights">Primary Tide Stations - Hourly Heights</option>
-                                    <option value="primary-hi-low">Primary Tide Stations - Hi and Low Waters</option>
-                                    <option value="secondary-hourly-heights">Secondary Tide Stations - Hourly Heights</option>
-                                    <option value="secondary-hi-low">Secondary Tide Stations - Hi and Low Waters</option>
-                                    <option value="astronomical">Astronomical Data</option>
-                                </select>
-                                @error('collection_name')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label class="label">
                                     <span class="label-text">Description</span>
                                     <span class="label-text-alt">(optional)</span>
                                 </label>
@@ -145,7 +146,19 @@
     </div>
 
     @push('scripts')
-        <script>
+        <script type="module">
+            $(document).ready(function () {
+                $('#collection_name').change(function () {
+                    let val = $(this).val();
+                    let location = $('#location_id');
+                   // console.log(val);
+                   if (val === 'moon-phases') {
+                       console.log('moon phases has been selected');
+                       $('#location_id select:first-child').attr('disabled', true);
+                       // location.prop('disabled', true);
+                   }
+                });
+            });
         </script>
     @endpush()
 
