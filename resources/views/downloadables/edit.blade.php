@@ -21,12 +21,36 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <label class="label">
+                                    <span class="label-text">Category</span>
+                                    <span class="label-text-alt">*</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <select id="collection_name" class="form-select @error('collection_name') is-invalid @enderror" name="collection_name">
+                                    <option disabled selected>Pick one</option>
+                                    <option value="primary-hourly-heights" {{ old('collection_name', $data['category']) == 'primary-hourly-heights' ? 'selected' : '' }}>Primary Tide Stations - Hourly Heights</option>
+                                    <option value="primary-hi-low" {{ old('collection_name', $data['category']) == 'primary-hi-low' ? 'selected' : '' }}>Primary Tide Stations - Hi and Low Waters</option>
+                                    <option value="secondary-hourly-heights" {{ old('collection_name', $data['category']) == 'secondary-hourly-heights' ? 'selected' : '' }}>Secondary Tide Stations - Hourly Heights</option>
+                                    <option value="secondary-hi-low" {{ old('collection_name', $data['category']) == 'secondary-hi-low' ? 'selected' : '' }}>Secondary Tide Stations - Hi and Low Waters</option>
+                                    <option value="astronomical" {{ old('collection_name', $data['category']) == 'astronomical' ? 'selected' : '' }}>Astronomical Data</option>
+                                    <option value="moon-phases" {{ old('collection_name', $data['category']) == 'moon-phases' ? 'selected' : '' }}>Moon Phases</option>
+                                </select>
+                                @error('collection_name')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label class="label">
                                     <span class="label-text">Location</span>
                                     <span class="label-text-alt"></span>
                                 </label>
                             </div>
                             <div class="col">
-                                <select class="form-select @error('location_id') is-invalid @enderror" name="location_id">
+                                <select id="location_id" class="form-select @error('location_id') is-invalid @enderror" name="location_id">
                                     @foreach($locations as $location)
                                         <option
                                             value="{{ $location['id'] }}" {{ old('location_id', $data['location_id']) == $location['id'] ? 'selected' : '' }}>{{ $location['name'] . ' - Code: '. $location['code'] }}</option>
@@ -82,42 +106,13 @@
                             </div>
                             <div class="col">
                                 <div class="input-group timeframe">
-                                    <input id="" name="timeframe" type="text" value="{{ old('timeframe', $data['timeframe']) }}" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Resource title in downloading the file. Ex: Jan-Feb 2023 or Sunrise Sunset 2023">
+                                    <input id="timeframe" name="timeframe" type="text" value="{{ old('timeframe', $data['timeframe']) }}" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Resource title in downloading the file. Ex: Jan-Feb 2023 or Sunrise Sunset 2023">
                                     @error('timeframe')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-{{--                                    <input id="timeframe" name="timeframe" type="text" class="form-control @error('timeframe') is-invalid @enderror" placeholder="Choose date and month">--}}
-{{--                                    @error('timeframe')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                            <strong>{{ $message }}</strong>--}}
-{{--                                        </span>--}}
-{{--                                    @enderror--}}
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label class="label">
-                                    <span class="label-text">Category</span>
-                                    <span class="label-text-alt">*</span>
-                                </label>
-                            </div>
-                            <div class="col">
-                                <select class="form-select @error('collection_name') is-invalid @enderror" name="collection_name">
-                                    <option disabled selected>Pick one</option>
-                                    <option value="primary-hourly-heights" {{ old('collection_name', $data['category']) == 'primary-hourly-heights' ? 'selected' : '' }}>Primary Tide Stations - Hourly Heights</option>
-                                    <option value="primary-hi-low" {{ old('collection_name', $data['category']) == 'primary-hi-low' ? 'selected' : '' }}>Primary Tide Stations - Hi and Low Waters</option>
-                                    <option value="secondary-hourly-heights" {{ old('collection_name', $data['category']) == 'secondary-hourly-heights' ? 'selected' : '' }}>Secondary Tide Stations - Hourly Heights</option>
-                                    <option value="secondary-hi-low" {{ old('collection_name', $data['category']) == 'secondary-hi-low' ? 'selected' : '' }}>Secondary Tide Stations - Hi and Low Waters</option>
-                                    <option value="astronomical" {{ old('collection_name', $data['category']) == 'astronomical' ? 'selected' : '' }}>Astronomical Data</option>
-                                </select>
-                                @error('collection_name')
-                                <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -159,7 +154,32 @@
     </div>
 
     @push('scripts')
-        <script>
+        <script type="module">
+            $(document).ready(function () {
+                var resource_title = $('#timeframe');
+
+                if ($('#collection_name').val() === 'moon-phases') {
+                    $('#location_id option:first-child').prop('selected', true);
+                    $('#location_id').prop('disabled', true);
+                    $('#location_asterisk').text('');
+                }
+
+                $('#collection_name').change(function () {
+                    let val = $(this).val();
+                    let location = $('#location_id');
+                    // console.log(val);
+                    if (val === 'moon-phases') {
+                        console.log('moon phases has been selected');
+                        $('#location_id option:first-child').prop('selected', true);
+                        $('#location_id').prop('disabled', true);
+                        $('#location_asterisk').text('');
+                    } else {
+                        console.log('moon phases is not selected');
+                        $('#location_id').prop('disabled', false);
+                        $('#location_asterisk').text('*');
+                    }
+                });
+            });
         </script>
     @endpush()
 

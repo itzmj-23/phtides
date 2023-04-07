@@ -29,7 +29,11 @@ class DownloadablesDataTable extends DataTable
 
             })
             ->editColumn('location', function ($query) {
-                return $query['location']['name'];
+                if (isset($query['location'])) {
+                    return $query['location']['name'];
+                }
+
+                return 'All';
             })
             ->editColumn('uploaded_at', function ($query) {
                 return Carbon::parse($query['created_at'])->format('m/d/Y');
@@ -75,7 +79,7 @@ class DownloadablesDataTable extends DataTable
             Column::make('id'),
             Column::make('location'),
             Column::make('category'),
-            Column::make('monthYear'),
+            Column::make('monthYear')->title('Resources Title'),
             Column::make('description'),
             Column::make('uploaded_at'),
         ];

@@ -44,14 +44,16 @@ class DownloadablesController extends Controller
                 'required',
                 'mimes:ppt,pptx,doc,docx,xls,xlsx,csv,txt,xlx,pdf,png,jpeg,jpg,pdf',
                 'max:20480'],
-            'location_id' => 'required',
+            'location_id' => 'required_unless:collection_name,moon-phases',
             'collection_name' => 'required',
         ], [
             'file.max' => 'The file must not be greater that 20MB.',
-            'location_id.required' => 'The location field is required.',
+            'location_id.required_unless' => 'The location field is required.',
             'collection_name.required' => 'The category field is required.',
-            'timeframe.required' => 'The month year field is required.',
+            'timeframe.required' => 'The resource title is required.',
         ]);
+
+//        dd($validated);
 
         try {
             DB::beginTransaction();
@@ -60,7 +62,7 @@ class DownloadablesController extends Controller
                 'category' => $request->collection_name,
                 'timeframe' => $request->timeframe,
                 'description' => $request->description,
-                'location_id' => $request->location_id,
+                'location_id' => isset($request->location_id) ?? 0,
             ]);
 
             if ($downloadable) {
@@ -123,14 +125,14 @@ class DownloadablesController extends Controller
             'timeframe' => 'required',
             'description' => 'max:250',
             'file' => [
-                'required',
+//                'required',
                 'mimes:pdf',
                 'max:20480'],
-            'location_id' => 'required',
+            'location_id' => 'required_unless:collection_name,moon-phases',
             'collection_name' => 'required',
         ], [
             'file.max' => 'The file must not be greater that 20MB.',
-            'location_id.required' => 'The location field is required.',
+            'location_id.required_unless' => 'The location field is required.',
             'collection_name.required' => 'The category field is required.',
             'timeframe.required' => 'The month year field is required.',
         ]);
