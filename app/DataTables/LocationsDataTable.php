@@ -24,8 +24,15 @@ class LocationsDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $btn = '<a href="' . route('location.show', $query['id']) . '" class="btn btn-primary">Manage</a>';
-                return $btn;
+                $manageBtn = '<a href="' . route('location.show', $query['id']) . '" class="btn btn-primary me-1">Manage</a>';
+                $deleteBtn = '<form method="POST" action="' . route('location.destroy', $query['id']) .'">
+                                '.csrf_field().'
+                                '.method_field('DELETE').'
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>';
+                return '<div class="d-flex flex-row">'.
+                    $manageBtn . $deleteBtn
+                    .'</div>';
             })
             ->setRowId('id');
     }

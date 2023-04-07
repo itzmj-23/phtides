@@ -143,9 +143,24 @@ class LocationController extends Controller
         }
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        $data = Location::find($id);
 
+        try {
+            DB::beginTransaction();
+
+            $data->delete();
+
+            DB::commit();
+            toastr()->success('Data has been deleted successfully!', 'Success');
+            return redirect()->route('location.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            toastr()->error($e->getMessage(), 'Error');
+            return back();
+        }
     }
 
     // ---------- API LOCATION ------------------------

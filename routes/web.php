@@ -60,6 +60,7 @@ Route::get('location/create', [LocationController::class, 'create'])->name('loca
 Route::post('location', [LocationController::class, 'store'])->name('location.store');
 Route::get('location/{id}', [LocationController::class, 'show'])->name('location.show');
 Route::put('location/{id}', [LocationController::class, 'update'])->name('location.update');
+Route::delete('location/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
 
 // SUNRISE SUNSET ROUTE
 Route::get('sunrise-sunset', [SunriseSunsetController::class, 'index'])->name('sunrise-sunset.index');

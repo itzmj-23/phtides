@@ -2,10 +2,9 @@
 
 @section('content')
 
-    <div class="container mt-5 mb-3">
+    <div class="container mt-5 mb-4">
         <div class="text-center">
             <h1 class="">Downloadable Resources</h1>
-            <p class="">Downloadable Resources Management begins here</p>
         </div>
 
         <div class="card mt-4">
