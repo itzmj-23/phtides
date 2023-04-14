@@ -123,8 +123,9 @@ class LocationController extends Controller
             'instruments' => 'nullable',
             'enclosure' => 'nullable',
             'controller' => 'nullable',
-            'tgbm' => 'nullable',
+            'station_datum' => 'nullable',
             'tide_staff' => 'nullable',
+            'tgbm' => 'nullable',
         ]);
 
         try {
