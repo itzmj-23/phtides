@@ -37,7 +37,7 @@
                             @foreach ($data as $data)
                             <tr>
                                 <td>
-                                    <a target="_blank" href="{{ route('userManual.show', $data['id']) }}" class="btn btn-primary">View</a>
+                                    <a target="_blank" href="{{ route('userManual.show') }}" class="btn btn-primary">View</a>
                                     <a href="{{ route('userManual.download', $data['id']) }}" class="btn btn-success">Download</a>
                                     <a href="{{ route('userManual.edit', $data['id']) }}" class="btn btn-secondary">Edit</a>
                                     <form class="d-inline-block" action="{{ route('userManual.destroy', $data['id']) }}" method="POST">

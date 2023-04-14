@@ -63,6 +63,7 @@ Route::get('/apk-v1', [APKController::class, 'downloadAPK'])->name('download.apk
 
 // ------------- USER MANUAL --------------------
 Route::get('/downloads/user-manual/{id}', [UserManualController::class, 'downloadUserManual'])->name('userManual.download');
+Route::get('/user-manual/show', [UserManualController::class, 'show'])->name('userManual.show');
 
 // ------------- PRIVACY POLICY --------------------
 Route::get('/privacy-policy/show', [PrivacyPolicyController::class, 'show'])->name('privacyPolicy.show');

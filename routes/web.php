@@ -77,7 +77,7 @@ Route::post('date-range/', [DateRangeController::class, 'update'])->name('date-r
 Route::get('user-manual/', [UserManualController::class, 'index'])->name('userManual.index');
 Route::get('user-manual/create', [UserManualController::class, 'create'])->name('userManual.create');
 Route::post('user-manual/', [UserManualController::class, 'store'])->name('userManual.store');
-Route::get('user-manual/{id}', [UserManualController::class, 'show'])->name('userManual.show');
+//Route::get('user-manual/{id}', [UserManualController::class, 'show'])->name('userManual.show');
 Route::get('user-manual/{id}/edit', [UserManualController::class, 'edit'])->name('userManual.edit');
 Route::post('user-manual/{id}', [UserManualController::class, 'update'])->name('userManual.update');
 Route::delete('user-manual/{id}', [UserManualController::class, 'destroy'])->name('userManual.destroy');

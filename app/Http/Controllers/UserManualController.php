@@ -15,7 +15,7 @@ class UserManualController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->except('downloadUserManual');
+            ->except('downloadUserManual', 'show');
     }
 
     // Download User Manual
@@ -66,9 +66,9 @@ class UserManualController extends Controller
     }
 
 
-    public function show($id)
+    public function show()
     {
-        $model = UserManual::find($id);
+        $model = UserManual::first();
         $media = $model->getMedia('user-manual');
         $mediaItem = $media->last();
 
