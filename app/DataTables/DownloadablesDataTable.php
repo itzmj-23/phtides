@@ -36,17 +36,20 @@ class DownloadablesDataTable extends DataTable
                 return 'All';
             })
             ->editColumn('uploaded_at', function ($query) {
-                return Carbon::parse($query['created_at'])->format('m/d/Y');
+                return Carbon::parse($query['created_at'])->format('m-d-Y');
             })
-            ->editColumn('monthYear', function ($query) {
-                return $query['timeframe'];
-            })
+            // ->editColumn('monthYear', function ($query) {
+            //     return $query['timeframe'];
+            // })
             ->setRowId('id');
     }
 
     public function query(Downloadables $model): QueryBuilder
     {
-        return $model->with('media')->newQuery();
+        return $model->with(['media', 'location'])->newQuery();
+
+
+
     }
 
     public function html(): HtmlBuilder
@@ -77,11 +80,11 @@ class DownloadablesDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
-            Column::make('location'),
+            Column::make('location')->data('location')->name('location.name')->title('Location'),
             Column::make('category'),
-            Column::make('monthYear')->title('Resources Title'),
+            Column::make('timeframe')->title('Resources Title'),
             Column::make('description'),
-            Column::make('uploaded_at'),
+            Column::make('uploaded_at')->name('created_at'),
         ];
     }
 
