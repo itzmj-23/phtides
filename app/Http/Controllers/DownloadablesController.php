@@ -62,7 +62,7 @@ class DownloadablesController extends Controller
                 'category' => $request->collection_name,
                 'timeframe' => $request->timeframe,
                 'description' => $request->description,
-                'location_id' => isset($request->location_id) ?? 0,
+                'location_id' => isset($request->location_id) ? $request->location_id : 0,
             ]);
 
             if ($downloadable) {

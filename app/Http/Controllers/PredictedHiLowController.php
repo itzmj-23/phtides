@@ -42,6 +42,8 @@ class PredictedHiLowController extends Controller
         try {
             DB::beginTransaction();
 
+            // dd($validated);
+
             // Import CSV to DB
             $this->importCSVtoDB($validated);
 
